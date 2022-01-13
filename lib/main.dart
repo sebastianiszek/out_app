@@ -5,8 +5,8 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({Key? key}) : super(key: key);
-  MaterialColor myBlue = const MaterialColor(0xFF1C2678, {
+  const MyApp({Key? key}) : super(key: key);
+  final MaterialColor outBlue = const MaterialColor(0xFF1C2678, {
     50: Color(0xFFF0EFFF),
     100: Color(0xFFDEE0FF),
     200: Color(0xFFBBC2FF),
@@ -24,7 +24,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(primarySwatch: myBlue),
+      theme: ThemeData(
+        primarySwatch: outBlue,
+        fontFamily: 'Varela Round',
+      ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
