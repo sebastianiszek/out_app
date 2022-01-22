@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:out_app/bookings_body/bookings_body.dart';
+import 'package:out_app/home_body/home_body.dart';
+import 'package:out_app/saved_body/saved_body.dart';
+import 'package:out_app/search_body/search_body.dart';
+import 'package:out_app/settings_body/settings_body.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -8,14 +13,14 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 2;
 
   static const List<Widget> _widgetOptions = <Widget>[
-    // HomeBody(),
-    // SearchBody(),
-    // AddMediaScreen(),
-    // AccountScreen(),
-    // PatientsScreen(),
+    SearchBody(),
+    SavedBody(),
+    HomeBody(),
+    BookingsBody(),
+    SettingsBody(),
   ];
 
   void _onItemTapped(int index) {
@@ -64,6 +69,9 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
+        backgroundColor: Theme.of(context).colorScheme.primaryVariant,
+        selectedItemColor: Theme.of(context).colorScheme.onPrimary,
+        unselectedItemColor: const Color(0x99FFFFFF),
       ),
     );
   }
