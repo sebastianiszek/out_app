@@ -19,7 +19,7 @@ class _OutHomeScreenState extends State<OutHomeScreen> {
     Timer(
         const Duration(seconds: 3),
         () => Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => const SecondScreen())));
+            MaterialPageRoute(builder: (context) => const HomeScreen())));
   }
 
   @override
