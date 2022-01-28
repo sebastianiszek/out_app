@@ -59,6 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),

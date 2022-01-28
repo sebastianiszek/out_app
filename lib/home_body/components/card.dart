@@ -1,52 +1,83 @@
 import 'package:flutter/material.dart';
 
 class RestaurantCard extends StatelessWidget {
-  const RestaurantCard({Key? key}) : super(key: key);
+  const RestaurantCard({Key? key, required this.title}) : super(key: key);
+  final String title;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        width: 48.0,
-        height: 48.0,
-        child: Card(
-          clipBehavior: Clip.antiAlias,
-          child: Column(
-            children: [
-              ListTile(
-                leading: Icon(Icons.arrow_drop_down_circle),
-                title: const Text('Card title 1'),
-                subtitle: Text(
-                  'Secondary Text',
-                  style: TextStyle(color: Colors.black.withOpacity(0.6)),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Text(
-                  'Greyhound divisively hello coldly wonderfully marginally far upon excluding.',
-                  style: TextStyle(color: Colors.black.withOpacity(0.6)),
-                ),
-              ),
-              ButtonBar(
-                alignment: MainAxisAlignment.start,
-                children: [
-                  FlatButton(
-                    onPressed: () {
-                      // Perform some action
-                    },
-                    child: const Text('ACTION 1'),
+    return SizedBox(
+        height: 200.0,
+        child: ListView(
+          scrollDirection: Axis.horizontal,
+          children: List.generate(10, (int index) {
+            return Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(15, 0, 5, 0),
+                child: Card(
+                  color: Theme.of(context).colorScheme.background,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15.0),
                   ),
-                  FlatButton(
-                    onPressed: () {
-                      // Perform some action
-                    },
-                    child: const Text('ACTION 2'),
-                  ),
-                ],
-              ),
-              //Image.asset('assets/card-sample-image.jpg'),
-            ],
-          ),
+                  elevation: 3,
+                  child: SizedBox(
+                      width: 225.0,
+                      height: 200.0,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(16, 12, 16, 8),
+                            child: Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    Text(
+                                      title,
+                                      style: const TextStyle(
+                                          fontFamily: "Roboto",
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Padding(
+                                        padding: const EdgeInsets.fromLTRB(
+                                            0, 5, 0, 5),
+                                        child: RichText(
+                                          text: TextSpan(
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyText1,
+                                            children: const [
+                                              WidgetSpan(
+                                                child: Icon(
+                                                  Icons.table_rows_outlined,
+                                                  size: 20,
+                                                ),
+                                              ),
+                                              TextSpan(
+                                                  text: ' 4  •  Opened Now'),
+                                            ],
+                                          ),
+                                        )),
+                                    const Padding(
+                                        padding:
+                                            EdgeInsets.fromLTRB(0, 10, 0, 5),
+                                        child: Text("££"))
+                                  ],
+                                )
+                              ],
+                            ),
+                          )
+                        ],
+                      )),
+                ));
+          }),
         ));
   }
 }

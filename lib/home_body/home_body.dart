@@ -17,7 +17,9 @@ class HomeBody extends StatelessWidget {
         BuildHeader(
           text: "Close to you",
         ),
-        RestaurantCard(),
+        RestaurantCard(
+          title: 'Restaurant',
+        ),
       ],
     );
   }

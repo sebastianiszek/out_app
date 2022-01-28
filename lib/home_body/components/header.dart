@@ -7,7 +7,7 @@ class BuildHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.fromLTRB(10, 5, 10, 15),
       child: Text(
         text,
         style: Theme.of(context).textTheme.headline5,
