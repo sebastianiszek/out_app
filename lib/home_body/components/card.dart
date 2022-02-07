@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:out_app/home_body/components/card_components/card_image.dart';
+import 'package:out_app/home_body/components/card_components/header.dart';
+import 'package:out_app/home_body/components/card_components/subhead.dart';
 
 class RestaurantCard extends StatelessWidget {
   const RestaurantCard({Key? key, required this.title}) : super(key: key);
@@ -7,7 +10,7 @@ class RestaurantCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        height: 200.0,
+        height: 203.0,
         child: ListView(
           scrollDirection: Axis.horizontal,
           children: List.generate(10, (int index) {
@@ -21,59 +24,26 @@ class RestaurantCard extends StatelessWidget {
                   elevation: 3,
                   child: SizedBox(
                       width: 225.0,
-                      height: 200.0,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.fromLTRB(16, 12, 16, 8),
+                            padding: const EdgeInsets.fromLTRB(16, 12, 16, 2),
                             child: Column(
                               children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                      title,
-                                      style: const TextStyle(
-                                          fontFamily: "Roboto",
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w600),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Padding(
-                                        padding: const EdgeInsets.fromLTRB(
-                                            0, 5, 0, 5),
-                                        child: RichText(
-                                          text: TextSpan(
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodyText1,
-                                            children: const [
-                                              WidgetSpan(
-                                                child: Icon(
-                                                  Icons.table_rows_outlined,
-                                                  size: 20,
-                                                ),
-                                              ),
-                                              TextSpan(
-                                                  text: ' 4  •  Opened Now'),
-                                            ],
-                                          ),
-                                        )),
-                                    const Padding(
-                                        padding:
-                                            EdgeInsets.fromLTRB(0, 10, 0, 5),
-                                        child: Text("££"))
-                                  ],
-                                )
+                                //short text if it's too long
+                                RestaurantCardHeader(title: title),
+                                const RestaurantCardSubHead(
+                                    tables: 4,
+                                    opened: "Opened Now",
+                                    price: 2,
+                                    type: "Italian",
+                                    rating: 5,
+                                    distance: "1 km"),
                               ],
                             ),
-                          )
+                          ),
+                          const RestaurantCardImage(),
                         ],
                       )),
                 ));

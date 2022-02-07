@@ -5,9 +5,11 @@ class TopSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-        padding: const EdgeInsetsDirectional.fromSTEB(12, 12, 12, 0),
-        child: Expanded(
+    return Row(
+      children: [
+        Expanded(
+            child: Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(12, 12, 12, 0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -21,6 +23,8 @@ class TopSection extends StatelessWidget {
               )
             ],
           ),
-        ));
+        ))
+      ],
+    );
   }
 }
