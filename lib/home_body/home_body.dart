@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:out_app/home_body/components/card_section.dart';
 import 'package:out_app/home_body/components/top_section.dart';
 
 import 'components/card.dart';
@@ -17,9 +18,7 @@ class HomeBody extends StatelessWidget {
         BuildHeader(
           text: "Close to you",
         ),
-        RestaurantCard(
-          title: 'Restaurant',
-        ),
+        HomeCardSection(),
       ],
     );
   }
