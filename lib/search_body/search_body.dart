@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:out_app/home_body/components/divider.dart';
 import 'package:out_app/shared_components/button.dart';
+import 'package:out_app/shared_components/input.dart';
 
 class SearchBody extends StatelessWidget {
   const SearchBody({Key? key}) : super(key: key);
@@ -9,7 +11,15 @@ class SearchBody extends StatelessWidget {
     return ListView(
       children: [
         Padding(
-            padding: const EdgeInsets.all(15),
+          padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
+          child: TextFormField(
+            decoration: getOutInputDecoration(
+                const Color(0xFFDEE0FF), const Color(0xFF000965)),
+          ),
+        ),
+        const DividerPadding(),
+        Padding(
+            padding: const EdgeInsets.fromLTRB(15, 0, 15, 15),
             child: ElevatedButton(
                 onPressed: () {
                   // Respond to button press
