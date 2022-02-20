@@ -23,69 +23,49 @@ class SearchBody extends StatelessWidget {
           ),
         ),
         const DividerPadding(),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(15, 0, 15, 15),
-          child: Card(
-            color: Theme.of(context).colorScheme.background,
-            shape: RoundedRectangleBorder(
+        Container(
+            margin: const EdgeInsets.fromLTRB(15, 0, 15, 15),
+            decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15.0),
-            ),
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Expanded(
-                      child: Row(
-                    children: [
-                      restaurantAvatar(70, 70),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Rests',
-                            style: const TextStyle(
-                                fontFamily: "Roboto",
-                                fontSize: 20,
-                                fontWeight: FontWeight.w600),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.all(15),
-                            child: Expanded(
-                                child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                  RichText(
-                                    text: TextSpan(
-                                      style:
-                                          Theme.of(context).textTheme.bodyText1,
-                                      children: [
-                                        const WidgetSpan(
-                                          child: Icon(
-                                            Icons.table_rows_outlined,
-                                            size: 20,
-                                          ),
-                                        ),
-                                        TextSpan(
-                                            text:
-                                                ' ' + "4" + '  •  ' + "opened"),
-                                      ],
-                                    ),
-                                  ),
-                                  Text(getPriceFromInt(2)),
-                                ])),
-                          )
-                        ],
-                      )
-                    ],
-                  )),
-                )
+              color: Theme.of(context).colorScheme.background,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.3),
+                  spreadRadius: 2,
+                  blurRadius: 2,
+                  offset: const Offset(0, 3), // changes position of shadow
+                ),
               ],
             ),
-          ),
-        ),
+            child: Padding(
+                padding: const EdgeInsets.all(10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    restaurantAvatar(70, 70),
+                    Expanded(
+                        child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                            padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                            child: Column(
+                              children: const [
+                                //short text if it's too long
+                                RestaurantCardHeader(title: "Restaurant"),
+                                RestaurantCardSubHead(
+                                    tables: 4,
+                                    opened: "Opened Now",
+                                    price: 2,
+                                    type: "Italian",
+                                    rating: 5,
+                                    distance: "1 km"),
+                              ],
+                            )),
+                      ],
+                    ))
+                  ],
+                ))),
         Padding(
             padding: const EdgeInsets.fromLTRB(15, 0, 15, 15),
             child: ElevatedButton(
