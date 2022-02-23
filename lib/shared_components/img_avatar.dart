@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-SizedBox restaurantAvatar(dynamic height, dynamic width) {
+SizedBox restaurantAvatar(dynamic width, dynamic height) {
   return SizedBox(
-      height: 70,
-      width: 70,
+      height: height,
+      width: width,
       child: ClipRRect(
           borderRadius: BorderRadius.circular(15.0),
           child: FittedBox(
