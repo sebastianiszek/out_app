@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-SizedBox restaurantAvatar(dynamic height, dynamic width) {
+SizedBox restaurantAvatar(dynamic width, dynamic height) {
   return SizedBox(
       height: height,
       width: width,
