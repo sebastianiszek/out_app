@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:out_app/home_body/components/card_components/price.dart';
 
 class SavedCardSubHead extends StatelessWidget {
   const SavedCardSubHead(

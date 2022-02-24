@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:out_app/saved_body/components/saved_card_header.dart';
 import 'package:out_app/saved_body/components/saved_card_subhead.dart';
-import 'package:out_app/search_body/components/search_card_header.dart';
-import 'package:out_app/search_body/components/search_card_subhead.dart';
 import 'package:out_app/shared_components/img_avatar.dart';
 
 class SavedCard extends StatelessWidget {

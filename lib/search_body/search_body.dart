@@ -1,16 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:out_app/home_body/components/card_components/header.dart';
-import 'package:out_app/home_body/components/card_components/price.dart';
-import 'package:out_app/home_body/components/card_components/subhead.dart';
 import 'package:out_app/home_body/components/divider.dart';
 import 'package:out_app/search_body/components/search_card.dart';
 import 'package:out_app/shared_components/button.dart';
-import 'package:out_app/shared_components/img_avatar.dart';
 import 'package:out_app/shared_components/input.dart';
-import 'package:out_app/shared_components/restaurant_tables_head.dart';
-
-import 'components/search_card_header.dart';
-import 'components/search_card_subhead.dart';
 
 class SearchBody extends StatelessWidget {
   const SearchBody({Key? key}) : super(key: key);

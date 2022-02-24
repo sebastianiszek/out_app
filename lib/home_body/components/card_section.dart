@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:out_app/home_body/components/card_components/card_image.dart';
-import 'package:out_app/home_body/components/card_components/header.dart';
-import 'package:out_app/home_body/components/card_components/subhead.dart';
 
 import 'card.dart';
 

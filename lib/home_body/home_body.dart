@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:out_app/home_body/components/card_section.dart';
 import 'package:out_app/home_body/components/top_section.dart';
 
-import 'components/card.dart';
 import 'components/divider.dart';
 import 'components/header.dart';
 
