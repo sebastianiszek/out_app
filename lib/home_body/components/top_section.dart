@@ -15,11 +15,12 @@ class TopSection extends StatelessWidget {
             children: [
               Image.asset('assets/images/logo_black.png', scale: 1),
               IconButton(
+                color: const Color(0xFF77767F),
+                iconSize: 32,
                 onPressed: () {
                   // Respond to button press
                 },
-                icon: const Icon(Icons.notifications,
-                    size: 32, color: Color(0xFF77767F)),
+                icon: const Icon(Icons.notifications),
               )
             ],
           ),
