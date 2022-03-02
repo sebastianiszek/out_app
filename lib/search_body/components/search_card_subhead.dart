@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:out_app/home_body/components/card_components/price.dart';
+import 'package:out_app/shared_components/table_icon.dart';
 
 class SearchCardSubHead extends StatelessWidget {
   const SearchCardSubHead(
@@ -31,11 +32,8 @@ class SearchCardSubHead extends StatelessWidget {
                   text: TextSpan(
                     style: Theme.of(context).textTheme.bodyText1,
                     children: [
-                      const WidgetSpan(
-                        child: Icon(
-                          Icons.table_rows_outlined,
-                          size: 20,
-                        ),
+                      WidgetSpan(
+                        child: getTableIcon(tables, 20),
                       ),
                       TextSpan(
                           text: ' ' + tables.toString() + '  •  ' + opened),

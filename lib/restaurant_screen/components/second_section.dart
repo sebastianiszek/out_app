@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:out_app/out_app_icons.dart';
 import 'package:out_app/shared_components/button.dart';
+import 'package:out_app/shared_components/table_icon.dart';
 
 class RestaurantViewSecondSection extends StatelessWidget {
   const RestaurantViewSecondSection(
@@ -35,7 +37,7 @@ class RestaurantViewSecondSection extends StatelessWidget {
                     const EdgeInsets.fromLTRB(40, 20, 40, 20)))),
             onPressed: () {},
             icon: const Icon(
-              Icons.ac_unit,
+              OutApp.logo,
               color: Colors.black,
             ),
             label: Text(
@@ -47,7 +49,7 @@ class RestaurantViewSecondSection extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(Icons.table_chart_outlined),
+            getTableIcon(tables, 24),
             Text(
               " 5 Tables Available",
               style: Theme.of(context).textTheme.bodyText1,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:out_app/shared_components/table_icon.dart';
 
 class SavedCardSubHead extends StatelessWidget {
   const SavedCardSubHead(
@@ -31,11 +32,8 @@ class SavedCardSubHead extends StatelessWidget {
                     style: Theme.of(context).textTheme.bodyText1,
                     children: [
                       TextSpan(text: type + '  •  ' + opened + '  '),
-                      const WidgetSpan(
-                        child: Icon(
-                          Icons.table_rows_outlined,
-                          size: 18,
-                        ),
+                      WidgetSpan(
+                        child: getTableIcon(tables, 18),
                       ),
                       TextSpan(text: ' ' + tables.toString()),
                     ],

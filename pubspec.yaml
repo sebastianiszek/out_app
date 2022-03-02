@@ -62,6 +62,10 @@ flutter:
     - family: Varela Round
       fonts:
         - asset: fonts/VarelaRound-Regular.ttf
+    - family: OutApp
+      fonts:
+        - asset: fonts/OutApp.ttf
+        
 
 
         
