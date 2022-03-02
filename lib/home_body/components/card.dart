@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:out_app/home_body/components/card_components/card_image.dart';
 import 'package:out_app/home_body/components/card_components/header.dart';
 import 'package:out_app/home_body/components/card_components/subhead.dart';
+import 'package:out_app/restaurant_screen/restaurant_screen.dart';
 
 class RestaurantCard extends StatelessWidget {
   const RestaurantCard(
@@ -30,30 +31,41 @@ class RestaurantCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(15.0),
       ),
       elevation: 3,
-      child: SizedBox(
-          width: 225.0,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(16, 12, 16, 2),
-                child: Column(
-                  children: [
-                    //short text if it's too long
-                    RestaurantCardHeader(title: title),
-                    const RestaurantCardSubHead(
-                        tables: 4,
-                        opened: "Opened Now",
-                        price: 2,
-                        type: "Italian",
-                        rating: 5,
-                        distance: "1 km"),
-                  ],
+      child: InkWell(
+        borderRadius: BorderRadius.circular(15.0),
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const RestaurantViewScreen(),
+            ),
+          );
+        },
+        child: SizedBox(
+            width: 225.0,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 12, 16, 2),
+                  child: Column(
+                    children: [
+                      //short text if it's too long
+                      RestaurantCardHeader(title: title),
+                      const RestaurantCardSubHead(
+                          tables: 4,
+                          opened: "Opened Now",
+                          price: 2,
+                          type: "Italian",
+                          rating: 5,
+                          distance: "1 km"),
+                    ],
+                  ),
                 ),
-              ),
-              const RestaurantCardImage(),
-            ],
-          )),
+                const RestaurantCardImage(),
+              ],
+            )),
+      ),
     );
   }
 }
