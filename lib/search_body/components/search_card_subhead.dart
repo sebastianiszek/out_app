@@ -12,11 +12,11 @@ class SearchCardSubHead extends StatelessWidget {
       required this.rating,
       required this.distance})
       : super(key: key);
-  final int tables;
+  final dynamic tables;
   final String opened;
-  final int price;
+  final dynamic price;
   final String type;
-  final double rating;
+  final dynamic rating;
   final String distance;
 
   @override
@@ -33,14 +33,14 @@ class SearchCardSubHead extends StatelessWidget {
                     style: Theme.of(context).textTheme.bodyText1,
                     children: [
                       WidgetSpan(
-                        child: getTableIcon(tables, 20),
+                        child: getTableIcon(tables.round(), 20),
                       ),
                       TextSpan(
                           text: ' ' + tables.toString() + '  •  ' + opened),
                     ],
                   ),
                 ),
-                Text(getPriceFromInt(price)),
+                Text(getPriceFromInt(price.round())),
               ])),
       Padding(
           padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
