@@ -77,12 +77,9 @@ class _RestaurantListState extends State<RestaurantList> {
             }),
       ),
       const DividerPadding(),
-      ListView.separated(
+      ListView.builder(
         shrinkWrap: true,
         itemCount: list.length,
-        separatorBuilder: (context, index) {
-          return const Divider();
-        },
         itemBuilder: (context, index) {
           return SearchCard(
             restaurant: list[index],
