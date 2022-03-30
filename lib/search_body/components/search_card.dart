@@ -43,7 +43,9 @@ class SearchCard extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const RestaurantViewScreen(),
+                  builder: (context) => RestaurantViewScreen(
+                    documentID: restaurant.id,
+                  ),
                 ),
               );
             },

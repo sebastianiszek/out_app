@@ -24,7 +24,7 @@ class RestaurantViewSecondSection extends StatelessWidget {
           ),
         ),
         Text(
-          getRemaining(stamps).toString() + " More for a £10 Discount",
+          getDiscountText(stamps),
           style: Theme.of(context).textTheme.bodyText1,
         ),
         Padding(
@@ -51,7 +51,7 @@ class RestaurantViewSecondSection extends StatelessWidget {
           children: [
             getTableIcon(tables, 24),
             Text(
-              " 5 Tables Available",
+              " " + tables.toString() + " Tables Available",
               style: Theme.of(context).textTheme.bodyText1,
             )
           ],
@@ -64,6 +64,13 @@ class RestaurantViewSecondSection extends StatelessWidget {
 List<Widget> getList(int total, int quantity) {
   //red BA1B1B
   //blank 77767F
+
+  if (quantity > 10) {
+    quantity = 10;
+  } else if (quantity < 0) {
+    quantity = 0;
+  }
+
   List<Widget> stars = [];
   for (var i = 0; i < quantity; i++) {
     stars.add(getIcon(false));
@@ -85,6 +92,18 @@ Icon getIcon(bool empty) {
   }
 }
 
-int getRemaining(int tables) {
-  return 10 - tables;
+String getDiscountText(int quantity) {
+  if (quantity > 10) {
+    quantity = 10;
+  } else if (quantity < 0) {
+    quantity = 0;
+  }
+
+  if (quantity == 10) {
+    return "£10 Discount Available";
+  }
+
+  quantity = 10 - quantity;
+
+  return quantity.toString() + " More for a £10 Discount";
 }

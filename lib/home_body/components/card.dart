@@ -37,7 +37,9 @@ class RestaurantCard extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const RestaurantViewScreen(),
+              builder: (context) => const RestaurantViewScreen(
+                documentID: 'ovT5HCJ1dRJwhFkebQRU',
+              ),
             ),
           );
         },
