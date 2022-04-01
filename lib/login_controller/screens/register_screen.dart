@@ -40,25 +40,28 @@ class _RegisterScreenState extends State<RegisterScreen> {
             children: [
               Row(
                 children: [
-                  TextButton.icon(
-                    style: ButtonStyle(
-                        alignment: Alignment.center,
-                        textStyle: MaterialStateProperty.all(
-                            Theme.of(context).textTheme.headline6),
-                        foregroundColor: MaterialStateProperty.all(
-                            const Color.fromARGB(255, 255, 255, 255))),
-                    icon: const Icon(Icons.chevron_left, size: 30),
-                    label: const Text("GO BACK"),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  )
+                  Padding(
+                    padding: const EdgeInsets.only(top: 15),
+                    child: TextButton.icon(
+                      style: ButtonStyle(
+                          alignment: Alignment.center,
+                          textStyle: MaterialStateProperty.all(
+                              Theme.of(context).textTheme.headline6),
+                          foregroundColor: MaterialStateProperty.all(
+                              const Color.fromARGB(255, 255, 255, 255))),
+                      icon: const Icon(Icons.chevron_left, size: 30),
+                      label: const Text("GO BACK"),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ),
                 ],
               ),
               Padding(
                   padding: const EdgeInsets.fromLTRB(
                     15.0,
-                    44.0,
+                    29.0,
                     35.0,
                     25.0,
                   ),
@@ -225,7 +228,8 @@ RichText getStrenghtText(double strength) {
 
   return RichText(
     text: TextSpan(
-      text: 'Password Strenght: ',
+      style: const TextStyle(color: Colors.white),
+      text: 'Password Strength: ',
       children: <TextSpan>[
         TextSpan(text: strengthText, style: TextStyle(color: strengthColor)),
       ],
