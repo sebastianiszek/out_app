@@ -8,6 +8,13 @@ class SettingsBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var currentUser = FirebaseAuth.instance.currentUser;
+    String userEmail = 'example@mail.com';
+
+    if (currentUser != null) {
+      userEmail = currentUser.email!;
+    }
+
     return ListView(
       padding: const EdgeInsets.fromLTRB(10, 20, 10, 10),
       children: [
@@ -16,27 +23,27 @@ class SettingsBody extends StatelessWidget {
           children: const [
             Padding(
                 padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
-                child: Icon(Icons.account_circle, size: 80))
+                child: Icon(Icons.account_circle, size: 70))
           ],
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              "User",
-              style: Theme.of(context)
-                  .textTheme
-                  .headline5
-                  ?.merge(const TextStyle(color: Color(0xFF000000))),
-            )
-          ],
-        ),
+        // Row(
+        //   mainAxisAlignment: MainAxisAlignment.center,
+        //   children: [
+        //     Text(
+        //       "User",
+        //       style: Theme.of(context)
+        //           .textTheme
+        //           .headline5
+        //           ?.merge(const TextStyle(color: Color(0xFF000000))),
+        //     )
+        //   ],
+        // ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
                 padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
-                child: Text("example@email.com",
+                child: Text(userEmail,
                     style: Theme.of(context).textTheme.bodyText1))
           ],
         ),
