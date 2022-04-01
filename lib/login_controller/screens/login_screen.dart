@@ -1,9 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:out_app/login_controller/screens/register_screen.dart';
 import 'package:out_app/shared_components/out_dialog.dart';
-
+import 'package:flutter/foundation.dart' show kIsWeb;
 import '../../shared_components/button.dart';
 import '../../shared_components/input.dart';
 
@@ -125,38 +126,95 @@ class _LoginScreenState extends State<LoginScreen> {
                           ?.merge(const TextStyle(fontSize: 17)),
                     )),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Don't have an account?",
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyText1
-                        ?.merge(const TextStyle(color: Color(0xFFFFFFFF))),
-                  ),
-                  TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const RegisterScreen()),
-                        );
-                      },
-                      child: Text(
-                        'Register',
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyText1
-                            ?.merge(const TextStyle(color: Color(0xFFEFE827))),
-                      )),
-                ],
+              Padding(
+                padding: const EdgeInsets.only(top: 5),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Don't have an account?",
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyText1
+                          ?.merge(const TextStyle(color: Color(0xFFFFFFFF))),
+                    ),
+                    TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const RegisterScreen()),
+                          );
+                        },
+                        child: Text(
+                          'Register',
+                          style: Theme.of(context).textTheme.bodyText1?.merge(
+                              const TextStyle(color: Color(0xFFEFE827))),
+                        )),
+                  ],
+                ),
               ),
+              // External Providers
+              // Padding(
+              //   padding: const EdgeInsetsDirectional.fromSTEB(22, 15, 22, 0),
+              //   child: ElevatedButton(
+              //       style: getOutButtonStyle(const Color(0xFFEFE827)).merge(
+              //           ButtonStyle(
+              //               textStyle: MaterialStateProperty.all(
+              //                   const TextStyle(color: Colors.black)),
+              //               padding: MaterialStateProperty.all(
+              //                   const EdgeInsetsDirectional.fromSTEB(
+              //                       25, 17, 25, 17)))),
+              //       onPressed: () async {
+              //         signInWithGoogle();
+              //       },
+              //       child: Text(
+              //         "Sign in using Google",
+              //         style: Theme.of(context)
+              //             .textTheme
+              //             .bodyText2
+              //             ?.merge(const TextStyle(fontSize: 17)),
+              //       )),
+              // ),
             ],
           )),
     );
   }
 }
+
+// Future<UserCredential> signInWithGoogle() async {
+//   if (kIsWeb) {
+//     // running on the web!
+//     GoogleAuthProvider googleProvider = GoogleAuthProvider();
+
+//     googleProvider
+//         .addScope('https://www.googleapis.com/auth/contacts.readonly');
+//     googleProvider.setCustomParameters({'login_hint': 'user@example.com'});
+
+//     // Once signed in, return the UserCredential
+//     return await FirebaseAuth.instance.signInWithPopup(googleProvider);
+
+//     // Or use signInWithRedirect
+//     // return await FirebaseAuth.instance.signInWithRedirect(googleProvider);
+
+//   } else {
+//     // Trigger the authentication flow
+//     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+//     // Obtain the auth details from the request
+//     final GoogleSignInAuthentication? googleAuth =
+//         await googleUser?.authentication;
+
+//     // Create a new credential
+//     final credential = GoogleAuthProvider.credential(
+//       accessToken: googleAuth?.accessToken,
+//       idToken: googleAuth?.idToken,
+//     );
+
+//     // Once signed in, return the UserCredential
+//     return await FirebaseAuth.instance.signInWithCredential(credential);
+//   }
+// }
 
 class MergeInputDecoration {
   final InputDecoration input1;
