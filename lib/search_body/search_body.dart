@@ -64,7 +64,7 @@ class _RestaurantListState extends State<RestaurantList> {
       }
     }
 
-    return Column(children: [
+    return ListView(children: [
       Padding(
         padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
         child: TextFormField(

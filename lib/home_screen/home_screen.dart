@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:out_app/home_screen/components/splash_screen.dart';
 
+import '../login_controller/login_controller.dart';
 import 'components/home.dart';
 
 class OutHomeScreen extends StatefulWidget {
@@ -20,7 +21,7 @@ class _OutHomeScreenState extends State<OutHomeScreen> {
         //const Duration(seconds: 3),
         const Duration(seconds: 1),
         () => Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => const HomeScreen())));
+            MaterialPageRoute(builder: (context) => const LoginController())));
   }
 
   @override

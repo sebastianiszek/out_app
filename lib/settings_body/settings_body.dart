@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:out_app/home_body/components/divider.dart';
 
@@ -66,14 +68,48 @@ class SettingsBody extends StatelessWidget {
         TextButton(
           style: TextButton.styleFrom(
               primary: Theme.of(context).colorScheme.error),
-          onPressed: () {},
+          onPressed: () async {
+            showCupertinoDialog(
+              context: context,
+              barrierDismissible: true,
+              builder: (context) {
+                return AlertDialog(
+                    title: const Center(
+                        child: Text(
+                      'Log Out',
+                    )),
+                    content: const Text(
+                      'Are you sure you want to log out?',
+                    ),
+                    actions: [
+                      TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Text('Cancel')),
+                      TextButton(
+                          onPressed: () async {
+                            await FirebaseAuth.instance.signOut();
+                            Navigator.pop(context);
+                          },
+                          child: Text(
+                            'Log Out',
+                            style: TextStyle(
+                                color: (Theme.of(context).colorScheme.error)),
+                          ))
+                    ],
+                    shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(15))));
+              },
+            );
+          },
           child: Row(
             children: const [
               Icon(
                 Icons.chevron_left,
               ),
               Text(
-                'Logout',
+                'Log out',
               )
             ],
           ),
