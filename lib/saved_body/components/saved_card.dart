@@ -1,95 +1,105 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:out_app/restaurant_screen/components/stamps_section.dart';
 import 'package:out_app/saved_body/components/saved_card_header.dart';
 import 'package:out_app/saved_body/components/saved_card_subhead.dart';
 import 'package:out_app/shared_components/img_avatar.dart';
 
-class SavedCard extends StatelessWidget {
-  const SavedCard({Key? key}) : super(key: key);
+import '../../restaurant_screen/restaurant_screen.dart';
 
+class SavedCard extends StatefulWidget {
+  const SavedCard({Key? key, required this.restaurant}) : super(key: key);
+  final QueryDocumentSnapshot<Object?> restaurant;
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.fromLTRB(15, 0, 15, 22),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15.0),
-        color: Theme.of(context).colorScheme.background,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.3),
-            spreadRadius: 1,
-            blurRadius: 2,
-            offset: const Offset(0, 1), // changes position of shadow
-          ),
-        ],
-      ),
-      child: Padding(
-          padding: const EdgeInsets.fromLTRB(12, 10, 10, 10),
-          child: Column(children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                restaurantAvatar(44, 44),
-                Expanded(
-                    child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                        padding: const EdgeInsets.fromLTRB(10, 8, 0, 0),
-                        child: Column(
-                          children: const [
-                            //short text if it's too long
-                            SavedCardHeader(title: "Restaurant"),
-                            SavedCardSubHead(
-                                tables: 4,
-                                opened: "Opened Now",
-                                price: 2,
-                                type: "Italian",
-                                rating: 5,
-                                distance: "1 km"),
-                          ],
-                        )),
-                  ],
-                ))
-              ],
-            ),
-            const Divider(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [...getList(7)],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 6, 0, 0),
-                  child: Text("2 More for a £10 Discount",
-                      style: Theme.of(context).textTheme.bodyText1),
-                )
-              ],
-            )
-          ])),
-    );
-  }
+  State<SavedCard> createState() => _SavedCardState();
 }
 
-List<Widget> getList(int number) {
-  //red BA1B1B
-  //blank 77767F
-  List<Widget> stars = [];
-  for (var i = 0; i < number; i++) {
-    stars.add(const Icon(
-      Icons.stars,
-      color: Color(0xFFBA1B1B),
-    ));
+class _SavedCardState extends State<SavedCard> {
+  @override
+  Widget build(BuildContext context) {
+    final Stream<DocumentSnapshot> _restaurantStream = FirebaseFirestore
+        .instance
+        .collection('Restaurants')
+        .doc(widget.restaurant.id)
+        .snapshots();
+
+    return StreamBuilder<DocumentSnapshot>(
+      stream: _restaurantStream,
+      builder:
+          (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+        if (snapshot.hasError) {
+          return const Text('Something went wrong');
+        }
+
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Container();
+        }
+
+        final data = snapshot.requireData;
+
+        if (!data.exists) {
+          return Container();
+        } else {
+          return Card(
+              margin: const EdgeInsets.fromLTRB(15, 0, 15, 22),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.0),
+              ),
+              child: InkWell(
+                borderRadius: BorderRadius.circular(15.0),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => RestaurantViewScreen(
+                        documentID: data.id,
+                      ),
+                    ),
+                  );
+                },
+                child: Padding(
+                    padding: const EdgeInsets.fromLTRB(12, 10, 10, 10),
+                    child: Column(children: <Widget>[
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          restaurantAvatar(44, 44),
+                          Expanded(
+                              child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(10, 8, 0, 0),
+                                  child: Column(
+                                    children: [
+                                      //short text if it's too long
+                                      SavedCardHeader(
+                                          title: widget.restaurant['name']),
+                                      SavedCardSubHead(
+                                          tables: data['tables'],
+                                          opened: "Opened Now",
+                                          price: data['price'],
+                                          type: data['type'],
+                                          rating: data['rating'],
+                                          distance: "1 km"),
+                                    ],
+                                  )),
+                            ],
+                          ))
+                        ],
+                      ),
+                      const Divider(),
+                      OutStampsSection(
+                        restaurantID: data.id,
+                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                        stampsAlignment: MainAxisAlignment.spaceBetween,
+                        textAlignment: MainAxisAlignment.end,
+                      )
+                    ])),
+              ));
+        }
+      },
+    );
   }
-  int remaining = 10 - number;
-  if (remaining > 0) {
-    for (var i = 0; i < remaining; i++) {
-      stars.add(const Icon(
-        Icons.stars,
-        color: Color(0xFF77767F),
-      ));
-    }
-  }
-  return stars;
 }

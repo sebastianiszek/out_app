@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:out_app/restaurant_screen/components/save_button.dart';
 
 class RestaurantViewImage extends StatelessWidget {
-  const RestaurantViewImage({Key? key, required this.restaurantTitle})
+  const RestaurantViewImage(
+      {Key? key,
+      required this.restaurantTitle,
+      required this.restaurantID,
+      required this.type})
       : super(key: key);
   final String restaurantTitle;
+  final String restaurantID;
+  final String type;
 
   @override
   Widget build(BuildContext context) {
@@ -45,13 +52,19 @@ class RestaurantViewImage extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const BackButton(color: Color(0xFFFFFFFF)),
               IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.bookmark_add_outlined,
-                    color: Colors.white,
-                  ))
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: const Icon(Icons.arrow_back),
+                color: Colors.white,
+                iconSize: 32,
+              ),
+              OutSaveButton(
+                name: restaurantTitle,
+                restaurantID: restaurantID,
+                type: type,
+              )
             ],
           ),
         ),

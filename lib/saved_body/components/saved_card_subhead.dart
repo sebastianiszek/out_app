@@ -11,11 +11,11 @@ class SavedCardSubHead extends StatelessWidget {
       required this.rating,
       required this.distance})
       : super(key: key);
-  final int tables;
+  final dynamic tables;
   final String opened;
-  final int price;
+  final dynamic price;
   final String type;
-  final double rating;
+  final dynamic rating;
   final String distance;
 
   @override

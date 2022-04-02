@@ -3,9 +3,18 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class OutStampsSection extends StatefulWidget {
-  const OutStampsSection({Key? key, required this.restaurantID})
+  const OutStampsSection(
+      {Key? key,
+      required this.restaurantID,
+      required this.stampsAlignment,
+      required this.padding,
+      required this.textAlignment})
       : super(key: key);
   final String restaurantID;
+  final MainAxisAlignment stampsAlignment;
+  final MainAxisAlignment textAlignment;
+  final EdgeInsets padding;
+
   @override
   State<OutStampsSection> createState() => _OutStampsSectionState();
 }
@@ -32,18 +41,24 @@ class _OutStampsSectionState extends State<OutStampsSection> {
           return Column(
             children: [
               Padding(
-                padding: const EdgeInsets.fromLTRB(34, 6, 34, 8),
+                padding: widget.padding,
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: widget.stampsAlignment,
                   children: [
                     ...getList(10, 0),
                   ],
                 ),
               ),
-              Text(
-                getDiscountText(0),
-                style: Theme.of(context).textTheme.bodyText1,
-              )
+              Row(
+                mainAxisAlignment: widget.textAlignment,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 6, 0, 0),
+                    child: Text(getDiscountText(0),
+                        style: Theme.of(context).textTheme.bodyText1),
+                  )
+                ],
+              ),
             ],
           );
         }
@@ -54,36 +69,48 @@ class _OutStampsSectionState extends State<OutStampsSection> {
           return Column(
             children: [
               Padding(
-                padding: const EdgeInsets.fromLTRB(34, 6, 34, 8),
+                padding: widget.padding,
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: widget.stampsAlignment,
                   children: [
                     ...getList(10, data['stamps']),
                   ],
                 ),
               ),
-              Text(
-                getDiscountText(data['stamps']),
-                style: Theme.of(context).textTheme.bodyText1,
-              )
+              Row(
+                mainAxisAlignment: widget.textAlignment,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 6, 0, 0),
+                    child: Text(getDiscountText(data['stamps']),
+                        style: Theme.of(context).textTheme.bodyText1),
+                  )
+                ],
+              ),
             ],
           );
         } else {
           return Column(
             children: [
               Padding(
-                padding: const EdgeInsets.fromLTRB(34, 6, 34, 8),
+                padding: widget.padding,
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: widget.stampsAlignment,
                   children: [
                     ...getList(10, 0),
                   ],
                 ),
               ),
-              Text(
-                getDiscountText(0),
-                style: Theme.of(context).textTheme.bodyText1,
-              )
+              Row(
+                mainAxisAlignment: widget.textAlignment,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 6, 0, 0),
+                    child: Text(getDiscountText(0),
+                        style: Theme.of(context).textTheme.bodyText1),
+                  )
+                ],
+              ),
             ],
           );
         }

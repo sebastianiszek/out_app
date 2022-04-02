@@ -43,7 +43,11 @@ class _RestaurantViewScreenState extends State<RestaurantViewScreen> {
             backgroundColor: const Color(0xFFFFFBFF),
             body: ListView(
               children: [
-                RestaurantViewImage(restaurantTitle: data['name']),
+                RestaurantViewImage(
+                  restaurantTitle: data['name'],
+                  restaurantID: data.id,
+                  type: data['type'],
+                ),
                 RestaurantViewTopSection(
                   address: data['address'],
                   price: data['price'],
