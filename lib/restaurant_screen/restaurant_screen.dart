@@ -33,28 +33,8 @@ class _RestaurantViewScreenState extends State<RestaurantViewScreen> {
         }
 
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Scaffold(
-              backgroundColor: const Color(0xFFFFFBFF),
-              body: ListView(
-                children: [
-                  const RestaurantViewImage(restaurantTitle: 'Loading...'),
-                  const RestaurantViewTopSection(
-                    address: 'Loading...',
-                    price: 0,
-                    rating: 0,
-                    ratings: 'Loading...',
-                    type: 'Loading...',
-                  ),
-                  getSectionDivider(),
-                  const RestaurantViewSecondSection(
-                    tables: 0,
-                    stamps: 0,
-                  ),
-                  getSectionDivider(),
-                  const RestaurantViewThirdSection(
-                      description: 'Loading...', openingTime: 'Loading...'),
-                ],
-              ));
+          return const Scaffold(
+              backgroundColor: Color(0xFFFFFBFF), body: Text('Loading...'));
         }
 
         final data = snapshot.requireData;
@@ -74,7 +54,7 @@ class _RestaurantViewScreenState extends State<RestaurantViewScreen> {
                 getSectionDivider(),
                 RestaurantViewSecondSection(
                   tables: data['tables'],
-                  stamps: 4,
+                  restaurantID: widget.documentID,
                 ),
                 getSectionDivider(),
                 RestaurantViewThirdSection(

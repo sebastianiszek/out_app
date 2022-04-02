@@ -22,7 +22,7 @@ class SettingsBody extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [
             Padding(
-                padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
+                padding: EdgeInsets.fromLTRB(0, 20, 0, 10),
                 child: Icon(Icons.account_circle, size: 70))
           ],
         ),

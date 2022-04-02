@@ -1,31 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:out_app/out_app_icons.dart';
+import 'package:out_app/restaurant_screen/components/stamps_section.dart';
 import 'package:out_app/shared_components/button.dart';
 import 'package:out_app/shared_components/table_icon.dart';
 
 class RestaurantViewSecondSection extends StatelessWidget {
   const RestaurantViewSecondSection(
-      {Key? key, required this.stamps, required this.tables})
+      {Key? key, required this.tables, required this.restaurantID})
       : super(key: key);
-  final int stamps;
+
   final int tables;
+  final String restaurantID;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Padding(
-          padding: const EdgeInsets.fromLTRB(34, 6, 34, 8),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              ...getList(10, stamps),
-            ],
-          ),
-        ),
-        Text(
-          getDiscountText(stamps),
-          style: Theme.of(context).textTheme.bodyText1,
+        OutStampsSection(
+          restaurantID: restaurantID,
         ),
         Padding(
           padding: const EdgeInsets.only(top: 20, bottom: 15),
@@ -59,51 +51,4 @@ class RestaurantViewSecondSection extends StatelessWidget {
       ],
     );
   }
-}
-
-List<Widget> getList(int total, int quantity) {
-  //red BA1B1B
-  //blank 77767F
-
-  if (quantity > 10) {
-    quantity = 10;
-  } else if (quantity < 0) {
-    quantity = 0;
-  }
-
-  List<Widget> stars = [];
-  for (var i = 0; i < quantity; i++) {
-    stars.add(getIcon(false));
-  }
-  int remaining = total - quantity;
-  if (remaining > 0) {
-    for (var i = 0; i < remaining; i++) {
-      stars.add(getIcon(true));
-    }
-  }
-  return stars;
-}
-
-Icon getIcon(bool empty) {
-  if (empty) {
-    return const Icon(Icons.stars, color: Color(0xFF77767F), size: 24);
-  } else {
-    return const Icon(Icons.stars, color: Color(0xFFBA1B1B), size: 24);
-  }
-}
-
-String getDiscountText(int quantity) {
-  if (quantity > 10) {
-    quantity = 10;
-  } else if (quantity < 0) {
-    quantity = 0;
-  }
-
-  if (quantity == 10) {
-    return "£10 Discount Available";
-  }
-
-  quantity = 10 - quantity;
-
-  return quantity.toString() + " More for a £10 Discount";
 }
