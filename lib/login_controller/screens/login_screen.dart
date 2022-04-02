@@ -105,6 +105,18 @@ class _LoginScreenState extends State<LoginScreen> {
                               .signInWithEmailAndPassword(
                                   email: emailController.text,
                                   password: passwordController.text);
+
+                          ScaffoldMessenger.of(context).removeCurrentSnackBar();
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text(
+                                'Login Successful',
+                                textAlign: TextAlign.center,
+                              ),
+                              duration: Duration(milliseconds: 1500),
+                              behavior: SnackBarBehavior.fixed,
+                            ),
+                          );
                         } on FirebaseAuthException catch (e) {
                           if (e.code == 'invalid-email') {
                             showOutDialog(
