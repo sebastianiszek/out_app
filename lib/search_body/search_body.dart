@@ -28,7 +28,17 @@ class _SearchBodyState extends State<SearchBody> {
         }
 
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Text("Loading..");
+          return ListView(
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
+                child: TextFormField(
+                    decoration: getOutInputDecoration(
+                        const Color(0xFFDEE0FF), const Color(0xFF000965)),
+                    onChanged: (String value) {}),
+              ),
+            ],
+          );
         }
 
         final data = snapshot.requireData;

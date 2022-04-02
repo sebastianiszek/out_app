@@ -60,7 +60,7 @@ class RestaurantViewImage extends StatelessWidget {
                 color: Colors.white,
                 iconSize: 32,
               ),
-              OutSaveButton(
+              OutSaveButtonLoad(
                 name: restaurantTitle,
                 restaurantID: restaurantID,
                 type: type,

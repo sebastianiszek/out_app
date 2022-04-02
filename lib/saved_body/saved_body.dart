@@ -5,27 +5,6 @@ import 'package:out_app/home_body/components/divider.dart';
 import 'package:out_app/saved_body/components/saved_card.dart';
 import 'package:out_app/shared_components/input.dart';
 
-// class SavedBody extends StatelessWidget {
-//   const SavedBody({Key? key}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return ListView(
-//       children: [
-//         Padding(
-//           padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
-//           child: TextFormField(
-//             decoration: getOutInputDecoration(
-//                 const Color(0xFFDEE0FF), const Color(0xFF000965)),
-//           ),
-//         ),
-//         const DividerPadding(),
-//         const SavedCard(),
-//       ],
-//     );
-//   }
-// }
-
 class SavedBody extends StatefulWidget {
   const SavedBody({Key? key}) : super(key: key);
 
@@ -50,7 +29,17 @@ class _SavedBodyState extends State<SavedBody> {
         }
 
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Text("Loading..");
+          return ListView(
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
+                child: TextFormField(
+                    decoration: getOutInputDecoration(
+                        const Color(0xFFDEE0FF), const Color(0xFF000965)),
+                    onChanged: (String value) {}),
+              ),
+            ],
+          );
         }
 
         final data = snapshot.requireData;
@@ -70,22 +59,80 @@ class RestaurantList extends StatefulWidget {
 }
 
 class _RestaurantListState extends State<RestaurantList> {
+  List<QueryDocumentSnapshot<Object?>> list = [];
   String name = '';
 
-  @override
-  Widget build(BuildContext context) {
-    List<QueryDocumentSnapshot<Object?>> list = [];
+  void updateList(String name) {
+    this.name = name;
+    List<QueryDocumentSnapshot<Object?>> tempList = [];
 
     for (int i = 0; i < widget.data.size; i++) {
       if (name.isEmpty) {
-        list = widget.data.docs;
+        tempList = widget.data.docs;
         break;
       }
       if (widget.data.docs[i]['name'].toString().toUpperCase().contains(name)) {
-        list.add(widget.data.docs[i]);
+        tempList.add(widget.data.docs[i]);
       }
     }
 
+    if (list.length != tempList.length) {
+      setState(() {
+        list = tempList;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    list = widget.data.docs;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    updateList(name);
+    if (widget.data.size == 0) {
+      return ListView(
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
+            child: TextFormField(
+                decoration: getOutInputDecoration(
+                    const Color(0xFFDEE0FF), const Color(0xFF000965)),
+                onChanged: (String value) {}),
+          ),
+          const DividerPadding(),
+          Center(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Icon(
+                  Icons.bookmark_add_outlined,
+                  size: 42,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: Text(
+                    'No saved places yet',
+                    style: Theme.of(context).textTheme.headline5,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: Text(
+                    'Tap the bookmark icon while viewing a place\nto save it here.',
+                    style: Theme.of(context).textTheme.bodyText1,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      );
+    }
     return ListView(
       children: [
         Padding(
@@ -94,9 +141,7 @@ class _RestaurantListState extends State<RestaurantList> {
               decoration: getOutInputDecoration(
                   const Color(0xFFDEE0FF), const Color(0xFF000965)),
               onChanged: (String value) {
-                setState(() {
-                  name = value.toUpperCase();
-                });
+                updateList(value.toUpperCase());
               }),
         ),
         const DividerPadding(),
