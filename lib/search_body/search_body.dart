@@ -1,9 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:out_app/home_body/components/card_components/price.dart';
 import 'package:out_app/home_body/components/divider.dart';
+import 'package:out_app/search_body/components/filter_dialog_body.dart';
 import 'package:out_app/search_body/components/search_card.dart';
 import 'package:out_app/shared_components/button.dart';
 import 'package:out_app/shared_components/input.dart';
+
+import '../search_body/components/top_section.dart';
 
 class SearchBody extends StatefulWidget {
   const SearchBody({Key? key}) : super(key: key);
@@ -59,32 +64,149 @@ class RestaurantList extends StatefulWidget {
 
 class _RestaurantListState extends State<RestaurantList> {
   String name = '';
+  // price1, price2, price3, tables
+  List<bool> filters = [true, true, true, false];
+
+  void resetFilters() {
+    setState(() {
+      filters = [true, true, true, false];
+    });
+  }
+
+  void setFilters(newFilters) {
+    setState(() {
+      filters = newFilters;
+    });
+  }
+
+  void showFilterDialog(List<bool> currentFilters) async {
+    // price1, price2, price3, tables
+    List<bool> copiedFilters = List.from(currentFilters);
+
+    showCupertinoDialog(
+        context: context,
+        barrierDismissible: true,
+        builder: (context) {
+          return AlertDialog(
+              title: const Center(
+                  child: Text(
+                'Filter',
+              )),
+              contentPadding: const EdgeInsets.only(top: 15),
+              content: SingleChildScrollView(
+                child: FilterDialogBody(
+                  priceFilter: copiedFilters,
+                  onFilterChanged: (value) {
+                    copiedFilters = value;
+                  },
+                ),
+              ),
+              actions: [
+                TextButton(
+                    onPressed: () {
+                      resetFilters();
+                      Navigator.pop(context);
+                    },
+                    child: Text(
+                      'Clear Filters',
+                      style: TextStyle(
+                          color: (Theme.of(context).colorScheme.error)),
+                    )),
+                TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text('Cancel')),
+                TextButton(
+                    onPressed: () async {
+                      setFilters(copiedFilters);
+                      Navigator.pop(context);
+                    },
+                    child: Text(
+                      'Apply',
+                      style: TextStyle(
+                          color: (Theme.of(context).colorScheme.primary)),
+                    ))
+              ],
+              shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(15))));
+        });
+  }
+
+  bool isPriceFiltered(List<bool> filters, int price) {
+    if (price == 1 && filters[0]) {
+      return false;
+    } else if (price == 2 && filters[1]) {
+      return false;
+    } else if (price == 3 && filters[2]) {
+      return false;
+    }
+    return true;
+  }
 
   @override
   Widget build(BuildContext context) {
     List<QueryDocumentSnapshot<Object?>> list = [];
 
-    for (int i = 0; i < widget.data.size; i++) {
-      if (name.isEmpty) {
-        list = widget.data.docs;
-        break;
-      }
-      if (widget.data.docs[i]['name'].toString().toUpperCase().contains(name)) {
-        list.add(widget.data.docs[i]);
+    if (name.isEmpty == true && filters == [true, true, true, false]) {
+      list = widget.data.docs;
+    } else {
+      for (int i = 0; i < widget.data.size; i++) {
+        if (widget.data.docs[i]['name']
+            .toString()
+            .toUpperCase()
+            .contains(name)) {
+          int price = widget.data.docs[i]['price'];
+          int tables = widget.data.docs[i]['tables'];
+
+          if (filters[3]) {
+            if (tables > 0) {
+              if (!isPriceFiltered(filters, price)) {
+                list.add(widget.data.docs[i]);
+              }
+            }
+          } else {
+            if (!isPriceFiltered(filters, price)) {
+              list.add(widget.data.docs[i]);
+            }
+          }
+          if (widget.data.docs[i]['price'] == 3) {}
+        }
       }
     }
 
-    return ListView(children: [
-      Padding(
-        padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
-        child: TextFormField(
-            decoration: getOutInputDecoration(
-                const Color(0xFFDEE0FF), const Color(0xFF000965)),
-            onChanged: (String value) {
+    if (list.isEmpty) {
+      return ListView(
+        children: [
+          TopSection(
+            onSearchValueChanged: (value) {
               setState(() {
                 name = value.toUpperCase();
               });
-            }),
+            },
+            onFilterPressed: () {
+              showFilterDialog(filters);
+            },
+          ),
+          const DividerPadding(),
+          const Text(
+            'No results',
+            textAlign: TextAlign.center,
+          )
+        ],
+      );
+    }
+
+    return ListView(children: [
+      TopSection(
+        onSearchValueChanged: (value) {
+          setState(() {
+            name = value.toUpperCase();
+          });
+        },
+        onFilterPressed: () {
+          showFilterDialog(filters);
+        },
       ),
       const DividerPadding(),
       ListView.builder(
@@ -94,37 +216,12 @@ class _RestaurantListState extends State<RestaurantList> {
           return SearchCard(
             restaurant: list[index],
           );
-          // ListTile(
-          //   leading: const Icon(
-          //     Icons.movie,
-          //     color: Colors.teal,
-          //   ),
-          //   title: Text(list[index]['name']),
-          //   trailing: const Icon(Icons.arrow_forward),
-          //   onTap: () {
-          //     // Navigator.push(
-          //     //   context,
-          //     //   MaterialPageRoute(
-          //     //     builder: (context) => MediaDetailScreen(media: list[index]),
-          //     //   ),
-          //     // );
-          //   },
-          // );
         },
-      )
+      ),
     ]);
   }
 }
 
-        // Padding(
-        //   padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
-        //   child: TextFormField(
-        //     decoration: getOutInputDecoration(
-        //         const Color(0xFFDEE0FF), const Color(0xFF000965)),
-        //   ),
-        // ),
-
-// const SearchCard(),
 
 
 // ****   button   ****

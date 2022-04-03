@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 InputDecoration getOutInputDecoration(Color background, Color onBackground) {
   return InputDecoration(
-    contentPadding: const EdgeInsetsDirectional.fromSTEB(20, 2, 25, 2),
+    contentPadding: const EdgeInsetsDirectional.fromSTEB(20, 19, 25, 19),
     filled: true,
     fillColor: background,
     hintText: 'Search',

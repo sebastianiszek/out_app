@@ -14,6 +14,12 @@ class RestaurantViewImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String sTitle = restaurantTitle;
+
+    if (restaurantTitle.length > 25) {
+      sTitle = restaurantTitle.substring(0, 25) + '...';
+    }
+
     return Stack(
       children: [
         Container(
@@ -74,6 +80,8 @@ class RestaurantViewImage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
+                constraints: BoxConstraints(
+                    maxWidth: MediaQuery.of(context).size.width - 80),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
                   color: const Color(0xFFFFFBFF),
@@ -83,6 +91,7 @@ class RestaurantViewImage extends StatelessWidget {
                   child: Text(
                     restaurantTitle,
                     style: Theme.of(context).textTheme.headline5,
+                    textAlign: TextAlign.center,
                   ),
                 ),
               ),

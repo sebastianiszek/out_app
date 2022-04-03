@@ -6,10 +6,16 @@ class SavedCardHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String sTitle = title;
+
+    if (title.length > 24) {
+      sTitle = title.substring(0, 22) + '...';
+    }
+
     return Row(
       children: [
         Text(
-          title,
+          sTitle,
           style: const TextStyle(
               height: 1,
               fontFamily: "Roboto",

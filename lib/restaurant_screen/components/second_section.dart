@@ -29,7 +29,7 @@ class RestaurantViewSecondSection extends StatelessWidget {
                 textStyle: MaterialStateProperty.all(
                     const TextStyle(color: Colors.black)),
                 padding: MaterialStateProperty.all(
-                    const EdgeInsets.fromLTRB(40, 20, 40, 20)))),
+                    const EdgeInsets.fromLTRB(40, 15, 40, 15)))),
             onPressed: () {},
             icon: const Icon(
               OutApp.logo,

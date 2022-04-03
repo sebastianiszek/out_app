@@ -46,7 +46,7 @@ class RestaurantViewThirdSection extends StatelessWidget {
               style: getOutButtonStyle(Theme.of(context).colorScheme.primary)
                   .merge(ButtonStyle(
                       padding: MaterialStateProperty.all(
-                          const EdgeInsets.fromLTRB(50, 20, 50, 20)))),
+                          const EdgeInsets.fromLTRB(50, 15, 50, 15)))),
               onPressed: () {},
               child: const Text("View")),
         ),

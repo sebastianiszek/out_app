@@ -133,6 +133,26 @@ class _RestaurantListState extends State<RestaurantList> {
         ],
       );
     }
+    if (list.isEmpty && name.isNotEmpty) {
+      return ListView(
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
+            child: TextFormField(
+                decoration: getOutInputDecoration(
+                    const Color(0xFFDEE0FF), const Color(0xFF000965)),
+                onChanged: (String value) {
+                  updateList(value.toUpperCase());
+                }),
+          ),
+          const DividerPadding(),
+          const Text(
+            'No results',
+            textAlign: TextAlign.center,
+          )
+        ],
+      );
+    }
     return ListView(
       children: [
         Padding(
