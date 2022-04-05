@@ -8,7 +8,7 @@ class BookingsCardSubhead extends StatelessWidget {
       required this.distance})
       : super(key: key);
   final String type;
-  final double rating;
+  final dynamic rating;
   final String distance;
 
   @override
