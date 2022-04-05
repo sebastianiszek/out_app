@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -179,6 +180,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 .createUserWithEmailAndPassword(
                                     email: emailController.text,
                                     password: passwordController.text);
+
+                            FirebaseFirestore.instance
+                                .collection('Users')
+                                .doc(userCredential.user!.uid)
+                                .set({
+                              'email': userCredential.user!.email,
+                              'booking': '',
+                            });
                           } on FirebaseAuthException catch (e) {
                             if (e.code == 'weak-password') {
                               showOutDialog(context,

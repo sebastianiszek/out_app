@@ -1,26 +1,27 @@
 import 'package:flutter/material.dart';
 
 class BookingsCardSubhead extends StatelessWidget {
-  const BookingsCardSubhead(
-      {Key? key,
-      required this.type,
-      required this.rating,
-      required this.distance})
-      : super(key: key);
+  const BookingsCardSubhead({
+    Key? key,
+    required this.type,
+    required this.rating,
+  }) : super(key: key);
   final String type;
   final dynamic rating;
-  final String distance;
+  // final String distance;
 
   @override
   Widget build(BuildContext context) {
     return Column(children: [
       Padding(
           padding: const EdgeInsets.fromLTRB(0, 6, 0, 0),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               RichText(
+                textAlign: TextAlign.left,
+                overflow: TextOverflow.ellipsis,
                 text: TextSpan(
                   style: Theme.of(context)
                       .textTheme
@@ -40,24 +41,25 @@ class BookingsCardSubhead extends StatelessWidget {
                   ],
                 ),
               ),
-              RichText(
-                text: TextSpan(
-                  style: Theme.of(context).textTheme.bodyText1,
-                  children: [
-                    WidgetSpan(
-                      alignment: PlaceholderAlignment.top,
-                      child: Icon(
-                        Icons.near_me,
-                        size: 16,
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
-                    ),
-                    TextSpan(text: distance),
-                  ],
-                ),
-              )
+
+              // RichText(
+              //   text: TextSpan(
+              //     style: Theme.of(context).textTheme.bodyText1,
+              //     children: [
+              //       WidgetSpan(
+              //         alignment: PlaceholderAlignment.top,
+              //         child: Icon(
+              //           Icons.near_me,
+              //           size: 16,
+              //           color: Theme.of(context).colorScheme.primary,
+              //         ),
+              //       ),
+              //       TextSpan(text: distance),
+              //     ],
+              //   ),
+              // )
             ],
-          ))
+          )),
     ]);
   }
 }

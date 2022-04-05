@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:out_app/bookings_body/components/booking_card.dart';
 import 'package:out_app/bookings_body/components/current_booking.dart';
+import 'package:out_app/bookings_body/components/past_bookings.dart';
 
 class BookingsBody extends StatelessWidget {
   const BookingsBody({Key? key}) : super(key: key);
@@ -23,7 +24,7 @@ class BookingsBody extends StatelessWidget {
               style: Theme.of(context).textTheme.headline6?.merge(
                   TextStyle(color: Theme.of(context).colorScheme.onSurface))),
         ),
-        const BookingCard(),
+        const PastBookings(),
       ],
     );
   }

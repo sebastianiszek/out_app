@@ -1,8 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:out_app/out_app_icons.dart';
+import 'package:out_app/restaurant_screen/components/booking_button.dart';
 import 'package:out_app/restaurant_screen/components/stamps_section.dart';
 import 'package:out_app/shared_components/button.dart';
+import 'package:out_app/shared_components/out_dialog.dart';
 import 'package:out_app/shared_components/table_icon.dart';
+
+import '../../shared_components/out_snackbar.dart';
 
 class RestaurantViewSecondSection extends StatelessWidget {
   const RestaurantViewSecondSection(
@@ -22,25 +28,7 @@ class RestaurantViewSecondSection extends StatelessWidget {
           stampsAlignment: MainAxisAlignment.spaceBetween,
           textAlignment: MainAxisAlignment.center,
         ),
-        Padding(
-          padding: const EdgeInsets.only(top: 20, bottom: 15),
-          child: ElevatedButton.icon(
-            style: getOutButtonStyle(const Color(0xFFEFE827)).merge(ButtonStyle(
-                textStyle: MaterialStateProperty.all(
-                    const TextStyle(color: Colors.black)),
-                padding: MaterialStateProperty.all(
-                    const EdgeInsets.fromLTRB(40, 15, 40, 15)))),
-            onPressed: () {},
-            icon: const Icon(
-              OutApp.logo,
-              color: Colors.black,
-            ),
-            label: Text(
-              "Book a Table",
-              style: Theme.of(context).textTheme.bodyText1,
-            ),
-          ),
-        ),
+        BookingButton(restaurantID: restaurantID, tables: tables),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

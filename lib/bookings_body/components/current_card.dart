@@ -50,9 +50,9 @@ class CurrentCard extends StatelessWidget {
                                   //short text if it's too long
                                   SearchCardHeader(title: data['name']),
                                   BookingsCardSubhead(
-                                      type: data['type'],
-                                      rating: data['rating'],
-                                      distance: "1 km"),
+                                    type: data['type'],
+                                    rating: data['rating'],
+                                  ),
                                 ],
                               )),
                         ],
@@ -80,9 +80,9 @@ class CurrentCard extends StatelessWidget {
                                 //short text if it's too long
                                 SearchCardHeader(title: 'Loading...'),
                                 BookingsCardSubhead(
-                                    type: 'Loading...',
-                                    rating: 0,
-                                    distance: "0 km"),
+                                  type: 'Loading...',
+                                  rating: 0,
+                                ),
                               ],
                             )),
                       ],
