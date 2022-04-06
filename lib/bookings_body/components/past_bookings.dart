@@ -33,6 +33,10 @@ class _PastBookingsState extends State<PastBookings> {
         }
 
         if (snapshot.hasData) {
+          if (snapshot.data!.size == 0) {
+            return const Text('Your past bookings will be listed here.');
+          }
+
           return ListView(
             padding: const EdgeInsets.all(0),
             shrinkWrap: true,
@@ -54,7 +58,6 @@ class _PastBookingsState extends State<PastBookings> {
             }).toList(),
           );
         }
-
         return const Text('Your past bookings will be listed here');
       },
     );

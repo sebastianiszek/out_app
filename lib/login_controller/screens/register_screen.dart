@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:out_app/shared_components/out_dialog.dart';
+import 'package:out_app/shared_components/out_snackbar.dart';
 
 import '../../shared_components/button.dart';
 import '../../shared_components/input.dart';
@@ -188,21 +189,25 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               'email': userCredential.user!.email,
                               'booking': '',
                             });
+                            Navigator.pop(context);
+                            outSnackbar('Registration successful', context);
                           } on FirebaseAuthException catch (e) {
                             if (e.code == 'weak-password') {
                               showOutDialog(context,
                                   'The provided password is too weak.');
                             } else if (e.code == 'email-already-in-use') {
+                              print('reached');
                               showOutDialog(context, 'E-mail already in use.');
                             } else if (e.code == 'invalid-email') {
                               showOutDialog(context, 'E-mail is invalid.');
+                            } else {
+                              showOutDialog(context, 'Fail.');
                             }
                           } catch (e) {
                             if (kDebugMode) {
                               print(e);
                             }
                           }
-                          Navigator.pop(context);
                         }
                       }
                     },

@@ -33,32 +33,48 @@ class CurrentCard extends StatelessWidget {
 
           return Card(
               margin: const EdgeInsets.fromLTRB(0, 0, 0, 22),
-              child: Padding(
-                  padding: const EdgeInsets.fromLTRB(12, 10, 10, 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      restaurantAvatar(44, 44),
-                      Expanded(
-                          child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.0),
+              ),
+              child: InkWell(
+                  borderRadius: BorderRadius.circular(15.0),
+                  onTap: () {
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) => RestaurantViewScreen(
+                    //       documentID: restaurantID,
+                    //     ),
+                    //   ),
+                    // );
+                  },
+                  child: Padding(
+                      padding: const EdgeInsets.fromLTRB(12, 10, 10, 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Padding(
-                              padding: const EdgeInsets.fromLTRB(10, 4, 0, 0),
+                          restaurantAvatar(44, 44),
+                          Expanded(
                               child: Column(
-                                children: [
-                                  //short text if it's too long
-                                  SearchCardHeader(title: data['name']),
-                                  BookingsCardSubhead(
-                                    type: data['type'],
-                                    rating: data['rating'],
-                                  ),
-                                ],
-                              )),
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(10, 4, 0, 0),
+                                  child: Column(
+                                    children: [
+                                      //short text if it's too long
+                                      SearchCardHeader(title: data['name']),
+                                      BookingsCardSubhead(
+                                        type: data['type'],
+                                        rating: data['rating'],
+                                      ),
+                                    ],
+                                  )),
+                            ],
+                          ))
                         ],
-                      ))
-                    ],
-                  )));
+                      ))));
         }
 
         return Card(

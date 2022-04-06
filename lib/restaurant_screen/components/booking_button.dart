@@ -72,8 +72,8 @@ class BookingButton extends StatelessWidget {
                                   if (accSnap['booking']
                                       .toString()
                                       .isNotEmpty) {
-                                    outSnackbar('Cancel previous booking first',
-                                        context);
+                                    outSnackbar(
+                                        'You already have a booking', context);
                                   } else {
                                     var list = [
                                       FirebaseAuth.instance.currentUser?.uid
