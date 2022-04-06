@@ -34,7 +34,7 @@ class _PastBookingsState extends State<PastBookings> {
 
         if (snapshot.hasData) {
           if (snapshot.data!.size == 0) {
-            return const Text('Your past bookings will be listed here.');
+            return const Text('Your bookings will be listed here.');
           }
 
           return ListView(

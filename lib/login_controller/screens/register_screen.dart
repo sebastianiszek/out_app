@@ -196,7 +196,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               showOutDialog(context,
                                   'The provided password is too weak.');
                             } else if (e.code == 'email-already-in-use') {
-                              print('reached');
                               showOutDialog(context, 'E-mail already in use.');
                             } else if (e.code == 'invalid-email') {
                               showOutDialog(context, 'E-mail is invalid.');

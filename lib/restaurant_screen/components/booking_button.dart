@@ -116,7 +116,7 @@ class BookingButton extends StatelessWidget {
             textStyle:
                 MaterialStateProperty.all(TextStyle(color: buttonTextColor)),
             padding: MaterialStateProperty.all(
-                const EdgeInsets.fromLTRB(40, 15, 40, 15)))),
+                const EdgeInsets.fromLTRB(40, 18, 40, 18)))),
         icon: Icon(
           OutApp.logo,
           color: buttonTextColor,

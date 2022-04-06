@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:out_app/booking_screen/booking_screen.dart';
 import 'package:out_app/search_body/components/search_card_header.dart';
 import 'package:out_app/search_body/components/search_card_subhead.dart';
 import 'package:out_app/shared_components/img_avatar.dart';
@@ -39,14 +40,14 @@ class CurrentCard extends StatelessWidget {
               child: InkWell(
                   borderRadius: BorderRadius.circular(15.0),
                   onTap: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => RestaurantViewScreen(
-                    //       documentID: restaurantID,
-                    //     ),
-                    //   ),
-                    // );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => BookingViewScreen(
+                          documentID: restaurantId,
+                        ),
+                      ),
+                    );
                   },
                   child: Padding(
                       padding: const EdgeInsets.fromLTRB(12, 10, 10, 10),
