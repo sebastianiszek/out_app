@@ -11,7 +11,7 @@
 ///      fonts:
 ///       - asset: fonts/OutApp.ttf
 ///
-/// 
+///
 ///
 import 'package:flutter/widgets.dart';
 
@@ -21,6 +21,8 @@ class OutApp {
   static const _kFontFam = 'OutApp';
   static const String? _kFontPkg = null;
 
-  static const IconData table_restaurant = IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData logo = IconData(0xe801, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData tableRestaurant =
+      IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData logo =
+      IconData(0xe801, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }
