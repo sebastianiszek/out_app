@@ -42,7 +42,7 @@ class BookingCard extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    restaurantAvatar(44, 44),
+                    const RestaurantAvatar(width: 44, height: 44),
                     Expanded(
                         child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

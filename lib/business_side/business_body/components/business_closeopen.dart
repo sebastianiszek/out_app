@@ -66,7 +66,7 @@ class _BusinessCloseOpenState extends State<BusinessCloseOpen> {
                                 FirebaseFirestore.instance
                                     .collection('Restaurants')
                                     .doc(widget.restaurantID)
-                                    .update({'opened': false});
+                                    .update({'opened': false, 'tables': 0});
                                 Navigator.pop(context);
                               },
                               child: Text(
@@ -113,7 +113,7 @@ class _BusinessCloseOpenState extends State<BusinessCloseOpen> {
                                 FirebaseFirestore.instance
                                     .collection('Restaurants')
                                     .doc(widget.restaurantID)
-                                    .update({'opened': true});
+                                    .update({'opened': true, 'tables': 0});
                                 Navigator.pop(context);
                               },
                               child: const Text(

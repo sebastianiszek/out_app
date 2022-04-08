@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:out_app/shared/shared_components/functions.dart';
 import 'package:out_app/shared/shared_components/table_icon.dart';
 
 class SavedCardSubHead extends StatelessWidget {
@@ -12,7 +13,7 @@ class SavedCardSubHead extends StatelessWidget {
       required this.distance})
       : super(key: key);
   final dynamic tables;
-  final String opened;
+  final bool opened;
   final dynamic price;
   final String type;
   final dynamic rating;
@@ -20,6 +21,8 @@ class SavedCardSubHead extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TextStyle openedStyle = getOpenedBulletStyle(opened);
+
     return Column(children: [
       Padding(
           padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
@@ -31,7 +34,10 @@ class SavedCardSubHead extends StatelessWidget {
                   text: TextSpan(
                     style: Theme.of(context).textTheme.bodyText1,
                     children: [
-                      TextSpan(text: type + '  •  ' + opened + '  '),
+                      TextSpan(text: type),
+                      TextSpan(text: '  •  ', style: openedStyle),
+                      getOpenedTextFormatted(opened),
+                      const TextSpan(text: '  '),
                       WidgetSpan(
                         child: getTableIcon(tables, 18),
                       ),

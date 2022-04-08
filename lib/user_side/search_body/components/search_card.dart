@@ -55,7 +55,7 @@ class SearchCard extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    restaurantAvatar(66, 66),
+                    const RestaurantAvatar(width: 66, height: 66),
                     Expanded(
                         child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -68,7 +68,7 @@ class SearchCard extends StatelessWidget {
                                 SearchCardHeader(title: restaurant['name']),
                                 SearchCardSubHead(
                                     tables: restaurant['tables'],
-                                    opened: "Opened Now",
+                                    opened: restaurant['opened'],
                                     price: restaurant['price'],
                                     type: restaurant['type'],
                                     rating: restaurant['rating'],

@@ -21,6 +21,7 @@ class _SearchBodyState extends State<SearchBody> {
     final Stream<QuerySnapshot> _restaurantsStream = FirebaseFirestore.instance
         .collection('Restaurants')
         .where('name')
+        .where('opened', isNotEqualTo: false)
         .snapshots();
 
     return StreamBuilder<QuerySnapshot>(

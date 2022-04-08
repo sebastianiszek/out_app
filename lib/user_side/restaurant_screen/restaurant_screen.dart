@@ -59,6 +59,7 @@ class _RestaurantViewScreenState extends State<RestaurantViewScreen> {
                 getSectionDivider(),
                 RestaurantViewSecondSection(
                   tables: data['tables'],
+                  opened: data['opened'],
                   restaurantID: widget.documentID,
                 ),
                 getSectionDivider(),

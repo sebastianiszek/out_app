@@ -63,7 +63,7 @@ class _SavedCardState extends State<SavedCard> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          restaurantAvatar(44, 44),
+                          const RestaurantAvatar(width: 44, height: 44),
                           Expanded(
                               child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,7 +78,7 @@ class _SavedCardState extends State<SavedCard> {
                                           title: widget.restaurant['name']),
                                       SavedCardSubHead(
                                           tables: data['tables'],
-                                          opened: "Opened Now",
+                                          opened: data['opened'],
                                           price: data['price'],
                                           type: data['type'],
                                           rating: data['rating'],
