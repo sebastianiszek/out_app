@@ -17,7 +17,7 @@ class RestaurantViewSecondSection extends StatelessWidget {
       children: [
         OutStampsSection(
           restaurantID: restaurantID,
-          padding: const EdgeInsets.fromLTRB(34, 6, 34, 8),
+          padding: const EdgeInsets.fromLTRB(8, 6, 8, 8),
           stampsAlignment: MainAxisAlignment.spaceBetween,
           textAlignment: MainAxisAlignment.center,
         ),

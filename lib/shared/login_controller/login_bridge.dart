@@ -32,10 +32,11 @@ class LoadApplicationSide extends StatelessWidget {
           Map<String, dynamic> data =
               snapshot.data!.data() as Map<String, dynamic>;
           if (data['restaurant'] != null) {
-            return const BusHomeScreen();
+            return BusHomeScreen(
+              restaurantID: data['restaurant'],
+            );
           }
           return const HomeScreen();
-          return Text("Full Name: ${data['full_name']} ${data['last_name']}");
         }
 
         return const SplashScreen();

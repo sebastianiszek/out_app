@@ -8,12 +8,14 @@ class OutStampsSection extends StatefulWidget {
       required this.restaurantID,
       required this.stampsAlignment,
       required this.padding,
-      required this.textAlignment})
+      required this.textAlignment,
+      this.userID = ''})
       : super(key: key);
   final String restaurantID;
   final MainAxisAlignment stampsAlignment;
   final MainAxisAlignment textAlignment;
   final EdgeInsets padding;
+  final String userID;
 
   @override
   State<OutStampsSection> createState() => _OutStampsSectionState();
@@ -22,9 +24,14 @@ class OutStampsSection extends StatefulWidget {
 class _OutStampsSectionState extends State<OutStampsSection> {
   @override
   Widget build(BuildContext context) {
+    String userID = widget.userID;
+    if (userID.isEmpty) {
+      userID = FirebaseAuth.instance.currentUser!.uid;
+    }
+
     Stream<DocumentSnapshot> _stampsStream = FirebaseFirestore.instance
         .collection('Users')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .doc(userID)
         .collection('stamps')
         .doc(widget.restaurantID)
         .snapshots();
@@ -40,13 +47,21 @@ class _OutStampsSectionState extends State<OutStampsSection> {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Column(
             children: [
-              Padding(
-                padding: widget.padding,
-                child: Row(
-                  mainAxisAlignment: widget.stampsAlignment,
-                  children: [
-                    ...getList(10, 0),
-                  ],
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    minWidth: MediaQuery.of(context).size.width - 20,
+                  ),
+                  child: Padding(
+                    padding: widget.padding,
+                    child: Row(
+                      mainAxisAlignment: widget.stampsAlignment,
+                      children: [
+                        ...getList(10, 0),
+                      ],
+                    ),
+                  ),
                 ),
               ),
               Row(
@@ -68,13 +83,21 @@ class _OutStampsSectionState extends State<OutStampsSection> {
         if (data.exists) {
           return Column(
             children: [
-              Padding(
-                padding: widget.padding,
-                child: Row(
-                  mainAxisAlignment: widget.stampsAlignment,
-                  children: [
-                    ...getList(10, data['stamps']),
-                  ],
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    minWidth: MediaQuery.of(context).size.width - 55,
+                  ),
+                  child: Padding(
+                    padding: widget.padding,
+                    child: Row(
+                      mainAxisAlignment: widget.stampsAlignment,
+                      children: [
+                        ...getList(10, data['stamps']),
+                      ],
+                    ),
+                  ),
                 ),
               ),
               Row(
@@ -92,15 +115,27 @@ class _OutStampsSectionState extends State<OutStampsSection> {
         } else {
           return Column(
             children: [
-              Padding(
-                padding: widget.padding,
-                child: Row(
-                  mainAxisAlignment: widget.stampsAlignment,
-                  children: [
-                    ...getList(10, 0),
-                  ],
+              // Padding(
+              // padding: widget.padding,
+              // child:
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    minWidth: MediaQuery.of(context).size.width - 20,
+                  ),
+                  child: Padding(
+                    padding: widget.padding,
+                    child: Row(
+                      mainAxisAlignment: widget.stampsAlignment,
+                      children: [
+                        ...getList(10, 0),
+                      ],
+                    ),
+                  ),
                 ),
               ),
+              // ),
               Row(
                 mainAxisAlignment: widget.textAlignment,
                 children: [
