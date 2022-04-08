@@ -123,7 +123,7 @@ class BusBookingViewScreen extends StatelessWidget {
                                         FirebaseFirestore.instance
                                             .collection('Users')
                                             .doc(userID)
-                                            .set({'booking': ''});
+                                            .update({'booking': ''});
                                         var list = [userID];
                                         FirebaseFirestore.instance
                                             .collection('Restaurants')
