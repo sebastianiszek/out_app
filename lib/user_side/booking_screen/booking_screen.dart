@@ -62,6 +62,7 @@ class _BookingViewScreenState extends State<BookingViewScreen> {
                   restaurantTitle: data['name'],
                   restaurantID: data.id,
                   type: data['type'],
+                  fileName: data['image'],
                 ),
                 Container(
                   constraints: BoxConstraints(

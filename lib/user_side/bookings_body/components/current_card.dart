@@ -53,7 +53,11 @@ class CurrentCard extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          const RestaurantAvatar(width: 44, height: 44),
+                          RestaurantAvatar(
+                            width: 44,
+                            height: 44,
+                            fileName: data['image'],
+                          ),
                           Expanded(
                               child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,

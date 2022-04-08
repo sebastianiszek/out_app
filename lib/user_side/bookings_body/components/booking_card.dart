@@ -11,12 +11,14 @@ class BookingCard extends StatelessWidget {
       required this.restaurantID,
       required this.type,
       this.rating,
-      required this.name})
+      required this.name,
+      required this.fileName})
       : super(key: key);
   final String restaurantID;
   final String name;
   final String type;
   final dynamic rating;
+  final String fileName;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +44,11 @@ class BookingCard extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    const RestaurantAvatar(width: 44, height: 44),
+                    RestaurantAvatar(
+                      width: 44,
+                      height: 44,
+                      fileName: fileName,
+                    ),
                     Expanded(
                         child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

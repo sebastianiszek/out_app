@@ -1,3 +1,6 @@
+import 'dart:typed_data';
+
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:out_app/user_side/restaurant_screen/components/save_button.dart';
 
@@ -6,28 +9,31 @@ class RestaurantViewImage extends StatelessWidget {
       {Key? key,
       required this.restaurantTitle,
       required this.restaurantID,
-      required this.type})
+      required this.type,
+      required this.fileName})
       : super(key: key);
   final String restaurantTitle;
   final String restaurantID;
   final String type;
+  final String fileName;
 
   @override
   Widget build(BuildContext context) {
+    ImageProvider image = const AssetImage('assets/images/placeholder.png');
+
+    if (fileName.isNotEmpty) {
+      image = NetworkImage(fileName);
+    }
+
     return Stack(
       children: [
         Container(
-          decoration: const BoxDecoration(
-            borderRadius: BorderRadius.only(
+          decoration: BoxDecoration(
+            borderRadius: const BorderRadius.only(
                 bottomLeft: Radius.circular(15.0),
                 bottomRight: Radius.circular(15.0)),
             color: Colors.transparent,
-            image: DecorationImage(
-              fit: BoxFit.cover,
-              image: AssetImage(
-                'assets/images/placeholder.png',
-              ),
-            ),
+            image: DecorationImage(fit: BoxFit.cover, image: image),
           ),
           height: 190.0,
         ),
