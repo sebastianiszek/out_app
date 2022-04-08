@@ -32,21 +32,22 @@ class _BusTopSectionState extends State<BusTopSection> {
         if (snapshot.connectionState == ConnectionState.done) {
           Map<String, dynamic> data =
               snapshot.data!.data() as Map<String, dynamic>;
+          ImageProvider image =
+              const AssetImage('assets/images/placeholder.png');
+
+          if (data['image'].isNotEmpty) {
+            image = NetworkImage(data['image']);
+          }
 
           return Stack(
             children: [
               Container(
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.only(
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.only(
                       bottomLeft: Radius.circular(15.0),
                       bottomRight: Radius.circular(15.0)),
                   color: Colors.transparent,
-                  image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: AssetImage(
-                      'assets/images/placeholder.png',
-                    ),
-                  ),
+                  image: DecorationImage(fit: BoxFit.cover, image: image),
                 ),
                 height: 190.0,
               ),

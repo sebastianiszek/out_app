@@ -55,7 +55,11 @@ class SearchCard extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    const RestaurantAvatar(width: 66, height: 66),
+                    RestaurantAvatar(
+                      width: 66,
+                      height: 66,
+                      fileName: restaurant['image'],
+                    ),
                     Expanded(
                         child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

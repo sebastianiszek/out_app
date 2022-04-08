@@ -47,12 +47,15 @@ class _PastBookingsState extends State<PastBookings> {
               if (data['restaurantID'] != null &&
                   data['name'] != null &&
                   data['type'] != null &&
-                  data['rating'] != null) {
+                  data['rating'] != null &&
+                  data['image'] != null) {
                 return BookingCard(
-                    restaurantID: data['restaurantID'],
-                    name: data['name'],
-                    type: data['type'],
-                    rating: data['rating']);
+                  restaurantID: data['restaurantID'],
+                  name: data['name'],
+                  type: data['type'],
+                  rating: data['rating'],
+                  fileName: data['image'],
+                );
               }
               return Container();
             }).toList(),

@@ -48,6 +48,7 @@ class _RestaurantViewScreenState extends State<RestaurantViewScreen> {
                   restaurantTitle: data['name'],
                   restaurantID: data.id,
                   type: data['type'],
+                  fileName: data['image'],
                 ),
                 RestaurantViewTopSection(
                   address: data['address'],
