@@ -210,6 +210,7 @@ class _RestaurantListState extends State<RestaurantList> {
       const DividerPadding(),
       ListView.builder(
         shrinkWrap: true,
+        physics: const ClampingScrollPhysics(),
         itemCount: list.length,
         itemBuilder: (context, index) {
           return SearchCard(

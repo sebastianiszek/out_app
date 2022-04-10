@@ -153,6 +153,7 @@ class _RestaurantListState extends State<RestaurantList> {
         ],
       );
     }
+
     return ListView(
       children: [
         Padding(
@@ -167,6 +168,7 @@ class _RestaurantListState extends State<RestaurantList> {
         const DividerPadding(),
         ListView.builder(
           shrinkWrap: true,
+          physics: const ScrollPhysics(),
           itemCount: list.length,
           itemBuilder: (context, index) {
             return SavedCard(
