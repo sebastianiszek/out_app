@@ -56,6 +56,7 @@ class _RestaurantViewScreenState extends State<RestaurantViewScreen> {
                   rating: data['rating'],
                   ratings: data['rating_count'].toString(),
                   type: data['type'],
+                  location: data['location'],
                 ),
                 getSectionDivider(),
                 RestaurantViewSecondSection(

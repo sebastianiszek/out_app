@@ -86,7 +86,7 @@ class _SavedCardState extends State<SavedCard> {
                                           price: data['price'],
                                           type: data['type'],
                                           rating: data['rating'],
-                                          distance: "1 km"),
+                                          location: data['location']),
                                     ],
                                   )),
                             ],

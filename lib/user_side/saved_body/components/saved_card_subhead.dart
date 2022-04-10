@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:out_app/shared/shared_components/functions.dart';
 import 'package:out_app/shared/shared_components/table_icon.dart';
+import 'package:out_app/user_side/distance_text.dart';
 
 class SavedCardSubHead extends StatelessWidget {
   const SavedCardSubHead(
@@ -10,14 +11,14 @@ class SavedCardSubHead extends StatelessWidget {
       required this.price,
       required this.type,
       required this.rating,
-      required this.distance})
+      required this.location})
       : super(key: key);
   final dynamic tables;
   final bool opened;
   final dynamic price;
   final String type;
   final dynamic rating;
-  final String distance;
+  final dynamic location;
 
   @override
   Widget build(BuildContext context) {
@@ -45,22 +46,7 @@ class SavedCardSubHead extends StatelessWidget {
                     ],
                   ),
                 ),
-                RichText(
-                  text: TextSpan(
-                    style: Theme.of(context).textTheme.bodyText1,
-                    children: [
-                      WidgetSpan(
-                        alignment: PlaceholderAlignment.top,
-                        child: Icon(
-                          Icons.near_me,
-                          size: 16,
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                      ),
-                      TextSpan(text: distance),
-                    ],
-                  ),
-                ),
+                DistanceText(location: location)
               ])),
     ]);
   }

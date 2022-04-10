@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:out_app/business_side/business_home_screen.dart/business_home_screen.dart';
 import 'package:out_app/shared/login_controller/login_bridge.dart';
 import 'package:out_app/shared/login_controller/screens/login_screen.dart';
+import 'package:out_app/shared/login_controller/screens/permission_screen.dart';
 
 import '../home_screen/components/home.dart';
 
@@ -21,7 +22,7 @@ class _LoginControllerState extends State<LoginController> {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return LoadApplicationSide(uid: snapshot.data!.uid);
+            return PermissionBridge(uid: snapshot.data!.uid);
           }
           return const LoginScreen();
         });

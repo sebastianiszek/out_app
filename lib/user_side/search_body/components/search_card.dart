@@ -76,7 +76,7 @@ class SearchCard extends StatelessWidget {
                                     price: restaurant['price'],
                                     type: restaurant['type'],
                                     rating: restaurant['rating'],
-                                    distance: "1 km"),
+                                    location: restaurant['location']),
                               ],
                             )),
                       ],
