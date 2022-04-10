@@ -19,18 +19,22 @@ class RestaurantViewScreen extends StatefulWidget {
 class _RestaurantViewScreenState extends State<RestaurantViewScreen> {
   @override
   Widget build(BuildContext context) {
-    final Stream<DocumentSnapshot> _restaurantsStream = FirebaseFirestore
-        .instance
-        .collection('Restaurants')
-        .doc(widget.documentID)
-        .snapshots();
+    final CollectionReference _restaurantsCollection =
+        FirebaseFirestore.instance.collection('Restaurants');
 
     return StreamBuilder<DocumentSnapshot>(
-      stream: _restaurantsStream,
+      stream: _restaurantsCollection.doc(widget.documentID).snapshots(),
       builder:
           (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
-        if (snapshot.hasError) {
-          return const Text('Something went wrong');
+        if (snapshot.hasError || !snapshot.hasData) {
+          return Scaffold(
+              backgroundColor: const Color(0xFFFFFBFF),
+              body: ListView(
+                children: const [
+                  BackButton(),
+                  Text('Something went wrong...'),
+                ],
+              ));
         }
 
         if (snapshot.connectionState == ConnectionState.waiting) {

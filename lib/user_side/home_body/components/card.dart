@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:out_app/user_side/home_body/components/card_components/card_image.dart';
 import 'package:out_app/user_side/home_body/components/card_components/header.dart';
@@ -14,15 +15,21 @@ class RestaurantCard extends StatelessWidget {
       required this.price,
       required this.type,
       required this.rating,
-      required this.distance})
+      required this.distance,
+      required this.restaurantID,
+      required this.fileName,
+      required this.location})
       : super(key: key);
   final String title;
   final int tables;
-  final String opened;
+  final bool opened;
   final int price;
   final String type;
-  final double rating;
-  final String distance;
+  final dynamic rating;
+  final dynamic distance;
+  final String restaurantID;
+  final String fileName;
+  final dynamic location;
 
   @override
   Widget build(BuildContext context) {
@@ -38,8 +45,8 @@ class RestaurantCard extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const RestaurantViewScreen(
-                documentID: 'ovT5HCJ1dRJwhFkebQRU',
+              builder: (context) => RestaurantViewScreen(
+                documentID: restaurantID,
               ),
             ),
           );
@@ -52,20 +59,25 @@ class RestaurantCard extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(16, 12, 16, 2),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       //short text if it's too long
                       RestaurantCardHeader(title: title),
-                      const RestaurantCardSubHead(
-                          tables: 4,
-                          opened: "Opened Now",
-                          price: 2,
-                          type: "Italian",
-                          rating: 5,
-                          distance: "1 km"),
+                      RestaurantCardSubHead(
+                        tables: tables,
+                        opened: opened,
+                        price: price,
+                        type: type,
+                        rating: rating,
+                        distance: distance,
+                        location: location,
+                      ),
                     ],
                   ),
                 ),
-                const RestaurantCardImage(),
+                RestaurantCardImage(
+                  fileName: fileName,
+                ),
               ],
             )),
       ),

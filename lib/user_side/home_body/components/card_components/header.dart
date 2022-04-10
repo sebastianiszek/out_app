@@ -6,10 +6,14 @@ class RestaurantCardHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Wrap(
       children: [
         Text(
           title,
+          textAlign: TextAlign.left,
+          textWidthBasis: TextWidthBasis.parent,
+          overflow: TextOverflow.ellipsis,
+          maxLines: 1,
           style: const TextStyle(
               fontFamily: "Roboto", fontSize: 20, fontWeight: FontWeight.w600),
         ),
