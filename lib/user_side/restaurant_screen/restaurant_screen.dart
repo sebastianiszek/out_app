@@ -67,7 +67,8 @@ class _RestaurantViewScreenState extends State<RestaurantViewScreen> {
                   getSectionDivider(),
                   RestaurantViewThirdSection(
                       description: data['description'],
-                      openingTime: "Sat-Sun 11:00 - 01:00"),
+                      openingTime: data['opening_times'],
+                      url: data['menu']),
                 ],
               ));
         }

@@ -17,10 +17,12 @@ class BookingButton extends StatelessWidget {
   Widget build(BuildContext context) {
     Color buttonColor = const Color(0xFFEFE827);
     Color buttonTextColor = Colors.black;
+    String buttonText = 'Book a Table';
 
     if (tables <= 0) {
       buttonColor = ThemeData.light().disabledColor;
       buttonTextColor = Colors.black54;
+      buttonText = 'No Tables';
     }
 
     return Padding(
@@ -121,7 +123,7 @@ class BookingButton extends StatelessWidget {
           color: buttonTextColor,
         ),
         label: Text(
-          "Book a Table",
+          buttonText,
           style: Theme.of(context)
               .textTheme
               .bodyText1
