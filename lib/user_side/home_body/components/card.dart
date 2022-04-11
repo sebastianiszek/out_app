@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:out_app/user_side/home_body/components/card_components/card_image.dart';
 import 'package:out_app/user_side/home_body/components/card_components/header.dart';

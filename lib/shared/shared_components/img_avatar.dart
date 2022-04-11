@@ -1,8 +1,4 @@
-import 'dart:typed_data';
-
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_image/firebase_image.dart';
 
 class RestaurantAvatar extends StatelessWidget {
   const RestaurantAvatar(

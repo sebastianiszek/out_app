@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:out_app/business_side/business_home_screen.dart/business_home_screen.dart';
 import 'package:out_app/shared/home_screen/components/home.dart';
 import 'package:out_app/shared/home_screen/components/splash_screen.dart';
-import 'package:out_app/shared/login_controller/screens/login_screen.dart';
 
 class LoadApplicationSide extends StatelessWidget {
   const LoadApplicationSide({Key? key, required this.uid}) : super(key: key);

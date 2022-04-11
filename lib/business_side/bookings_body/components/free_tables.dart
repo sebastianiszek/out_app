@@ -33,6 +33,5 @@ class FreeTables extends StatelessWidget {
         ],
       )),
     );
-    ;
   }
 }

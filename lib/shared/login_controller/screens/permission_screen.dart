@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:out_app/shared/home_screen/components/splash_screen.dart';
 import 'package:out_app/shared/login_controller/login_bridge.dart';
 
 class PermissionBridge extends StatelessWidget {

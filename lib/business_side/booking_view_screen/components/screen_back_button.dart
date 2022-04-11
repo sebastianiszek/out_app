@@ -9,8 +9,8 @@ class ScreenBackButton extends StatelessWidget {
       children: [
         TextButton.icon(
             style: ButtonStyle(
-                minimumSize: MaterialStateProperty.all(Size(0, 50)),
-                padding: MaterialStateProperty.all(EdgeInsets.all(25))),
+                minimumSize: MaterialStateProperty.all(const Size(0, 50)),
+                padding: MaterialStateProperty.all(const EdgeInsets.all(25))),
             onPressed: () {
               Navigator.pop(context);
             },

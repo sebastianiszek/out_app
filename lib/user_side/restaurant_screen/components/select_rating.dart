@@ -99,7 +99,7 @@ class _SelectRatingState extends State<SelectRating> {
                       .then((value) => outSnackbar('Rating updated.', context))
                       .onError((error, stackTrace) => outSnackbar(
                           'Error occurred, please try again.', context));
-                }).catchError((error) => print(error.toString()));
+                }).catchError((error) => null);
               },
               child: const Text('Save')),
         ],

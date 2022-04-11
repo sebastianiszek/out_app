@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:out_app/shared/shared_components/functions.dart';
 import 'package:out_app/shared/shared_components/table_icon.dart';
 import 'package:out_app/user_side/distance_text.dart';

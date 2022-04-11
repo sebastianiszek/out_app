@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:out_app/business_side/bookings_body/bus_bookings_body.dart';
 import 'package:out_app/business_side/business_body/business_body.dart';
-import 'package:out_app/user_side/bookings_body/bookings_body.dart';
-import 'package:out_app/user_side/home_body/home_body.dart';
-import 'package:out_app/user_side/saved_body/saved_body.dart';
-import 'package:out_app/user_side/search_body/search_body.dart';
-import 'package:out_app/user_side/settings_body/settings_body.dart';
 
 class BusHomeScreen extends StatefulWidget {
   const BusHomeScreen({Key? key, required this.restaurantID}) : super(key: key);
