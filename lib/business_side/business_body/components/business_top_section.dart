@@ -83,7 +83,7 @@ class _BusTopSectionState extends State<BusTopSection> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                ...getList(5, data['rating']),
+                                ...getList(5, data['rating'].round()),
                               ],
                             ),
                           ),

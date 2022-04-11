@@ -19,6 +19,54 @@ class BusBookingViewScreen extends StatelessWidget {
   final String userID;
   final String userEmail;
 
+  void giveStamp() {
+    FirebaseFirestore.instance
+        .collection('Users')
+        .doc(userID)
+        .collection('stamps')
+        .doc(restaurantID)
+        .update({'stamps': FieldValue.increment(1)}).onError(
+            (error, stackTrace) => FirebaseFirestore.instance
+                .collection('Users')
+                .doc(userID)
+                .collection('stamps')
+                .doc(restaurantID)
+                .set({'stamps': FieldValue.increment(1)}));
+  }
+
+  void addPastBooking() {
+    FirebaseFirestore.instance
+        .collection('Restaurants')
+        .doc(restaurantID)
+        .get()
+        .then((value) {
+      FirebaseFirestore.instance
+          .collection('Users')
+          .doc(userID)
+          .collection('bookings')
+          .add({
+        'date': DateTime.now(),
+        'restaurantID': restaurantID,
+        'image': value['image'],
+        'rating': value['rating'],
+        'name': value['name'],
+        'type': value['type']
+      });
+    });
+  }
+
+  void removeCurrentBooking() {
+    FirebaseFirestore.instance
+        .collection('Users')
+        .doc(userID)
+        .update({'booking': ''});
+    var list = [userID];
+    FirebaseFirestore.instance
+        .collection('Restaurants')
+        .doc(restaurantID)
+        .update({'bookings': FieldValue.arrayRemove(list)});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,26 +87,67 @@ class BusBookingViewScreen extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 35),
                   child: ElevatedButton(
                     onPressed: () async {
-                      outSnackbar('Gave a stamp', context);
-                      FirebaseFirestore.instance
-                          .collection('Users')
-                          .doc(userID)
-                          .collection('stamps')
-                          .doc(restaurantID)
-                          .update({'stamps': FieldValue.increment(1)}).onError(
-                              (error, stackTrace) => FirebaseFirestore.instance
-                                  .collection('Users')
-                                  .doc(userID)
-                                  .collection('stamps')
-                                  .doc(restaurantID)
-                                  .set({'stamps': FieldValue.increment(1)}));
+                      showCupertinoDialog(
+                          context: context,
+                          barrierDismissible: true,
+                          builder: (context) {
+                            return AlertDialog(
+                                title: const Center(
+                                    child: Text(
+                                  'Close Booking',
+                                )),
+                                actions: [
+                                  TextButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text(
+                                        'Go Back',
+                                        style: TextStyle(
+                                            color: (Theme.of(context)
+                                                .colorScheme
+                                                .primary)),
+                                      )),
+                                  TextButton(
+                                      onPressed: () async {
+                                        Navigator.pop(context);
+                                        Navigator.pop(context);
+                                        outSnackbar('Closed Booking', context);
+                                        removeCurrentBooking();
+                                        addPastBooking();
+                                      },
+                                      child: Text(
+                                        'Close Booking',
+                                        style: TextStyle(
+                                            color: (Theme.of(context)
+                                                .colorScheme
+                                                .error)),
+                                      )),
+                                  TextButton(
+                                      onPressed: () async {
+                                        Navigator.pop(context);
+                                        Navigator.pop(context);
+                                        outSnackbar(
+                                            'Gave a stamp and closed booking',
+                                            context);
+                                        giveStamp();
+                                        removeCurrentBooking();
+                                        addPastBooking();
+                                      },
+                                      child: const Text(
+                                        'Give Stamp and Close',
+                                        style: TextStyle(color: (Colors.green)),
+                                      )),
+                                ],
+                                shape: const RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(15))));
+                          });
                     },
-                    child: const Text('Give a Stamp'),
-                    style:
-                        getOutButtonStyle(Theme.of(context).colorScheme.primary)
-                            .merge(ButtonStyle(
-                                minimumSize: MaterialStateProperty.all(
-                                    const Size(180, 50)))),
+                    child: const Text('Close Booking'),
+                    style: getOutButtonStyle(Colors.green).merge(ButtonStyle(
+                        minimumSize:
+                            MaterialStateProperty.all(const Size(180, 50)))),
                   ),
                 )
               ],
@@ -75,13 +164,8 @@ class BusBookingViewScreen extends StatelessWidget {
                           .doc(userID)
                           .collection('stamps')
                           .doc(restaurantID)
-                          .update({'stamps': 0}).onError((error, stackTrace) =>
-                              FirebaseFirestore.instance
-                                  .collection('Users')
-                                  .doc(userID)
-                                  .collection('stamps')
-                                  .doc(restaurantID)
-                                  .set({'stamps': 0}));
+                          .set({'stamps': 0}).onError((error, stackTrace) =>
+                              outSnackbar('Error occured', context));
                     },
                     child: const Text('Redeem Stamps'),
                     style: getOutButtonStyle(Colors.amber).merge(ButtonStyle(
@@ -120,18 +204,7 @@ class BusBookingViewScreen extends StatelessWidget {
                                         Navigator.pop(context);
                                         outSnackbar(
                                             'Cancelled Booking', context);
-                                        FirebaseFirestore.instance
-                                            .collection('Users')
-                                            .doc(userID)
-                                            .update({'booking': ''});
-                                        var list = [userID];
-                                        FirebaseFirestore.instance
-                                            .collection('Restaurants')
-                                            .doc(restaurantID)
-                                            .update({
-                                          'bookings':
-                                              FieldValue.arrayRemove(list)
-                                        });
+                                        removeCurrentBooking();
                                       },
                                       child: Text(
                                         'Cancel Booking',
@@ -160,3 +233,5 @@ class BusBookingViewScreen extends StatelessWidget {
         ));
   }
 }
+
+void giveStamp() {}
