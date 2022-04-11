@@ -13,24 +13,28 @@ class PermissionBridge extends StatelessWidget {
       future: _determinePosition(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const PermissionScreenText(text: 'Waiting...');
+          return const PermissionScreenText(text: '', showButton: false);
         }
         if (snapshot.hasError) {
           return const PermissionScreenText(
-              text: 'Enable location to use the application');
+              text: 'Enable location to use the application', showButton: true);
         }
         if (snapshot.hasData) {
           return LoadApplicationSide(uid: uid);
         }
-        return const PermissionScreenText(text: 'Loading...');
+        return const PermissionScreenText(
+            text: 'Loading...', showButton: false);
       },
     );
   }
 }
 
 class PermissionScreenText extends StatelessWidget {
-  const PermissionScreenText({Key? key, required this.text}) : super(key: key);
+  const PermissionScreenText(
+      {Key? key, required this.text, required this.showButton})
+      : super(key: key);
   final String text;
+  final bool showButton;
 
   @override
   Widget build(BuildContext context) {
@@ -38,15 +42,22 @@ class PermissionScreenText extends StatelessWidget {
         backgroundColor: const Color(0xFF1C2678),
         body: Center(
             child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Image.asset('assets/images/logo.png', scale: 1),
-            Text(text),
-            TextButton(
-                onPressed: () async {
-                  await Geolocator.openAppSettings();
-                  await Geolocator.openLocationSettings();
-                },
-                child: const Text('Open settings'))
+            Text(
+              text,
+              style: const TextStyle(color: Colors.white),
+            ),
+            showButton
+                ? TextButton(
+                    onPressed: () async {
+                      await Geolocator.openAppSettings();
+                      await Geolocator.openLocationSettings();
+                    },
+                    child: const Text('Open settings'))
+                : Container()
           ],
         )));
   }

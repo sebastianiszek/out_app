@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:out_app/shared/shared_components/out_snackbar.dart';
 import 'package:out_app/user_side/home_body/components/card_components/price.dart';
+import 'package:out_app/user_side/restaurant_screen/components/rating_button.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class RestaurantViewTopSection extends StatelessWidget {
@@ -13,14 +14,16 @@ class RestaurantViewTopSection extends StatelessWidget {
       required this.ratings,
       required this.address,
       required this.price,
-      required this.location})
+      required this.location,
+      required this.restaurantID})
       : super(key: key);
   final String type;
   final int price;
-  final int rating;
+  final dynamic rating;
   final String ratings;
   final String address;
   final GeoPoint location;
+  final String restaurantID;
 
   @override
   Widget build(BuildContext context) {
@@ -29,17 +32,23 @@ class RestaurantViewTopSection extends StatelessWidget {
         Text(type + " " + getPriceFromInt(price),
             style: Theme.of(context).textTheme.bodyText1),
         // Rating
+
         Padding(
           padding: const EdgeInsets.only(top: 7),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              ...getList(5, rating),
+              ...getList(5, rating.round()),
             ],
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 3),
+            padding: const EdgeInsets.only(top: 2),
+            child: RatingButton(
+              restaurantID: restaurantID,
+            )),
+        Padding(
+          padding: const EdgeInsets.only(top: 0, bottom: 5),
           child: Text(
             ratings + " Ratings",
             style: Theme.of(context)
@@ -48,6 +57,7 @@ class RestaurantViewTopSection extends StatelessWidget {
                 ?.merge(const TextStyle(color: Colors.black)),
           ),
         ),
+
         TextButton.icon(
           onPressed: () async {
             Position currentLocation = await Geolocator.getCurrentPosition();
@@ -100,8 +110,8 @@ List<Widget> getList(int total, int quantity) {
 
 Icon getIcon(bool empty) {
   if (empty) {
-    return const Icon(Icons.star, color: Color(0xFFC3C4CF), size: 16);
+    return const Icon(Icons.star, color: Color(0xFFC3C4CF), size: 18);
   } else {
-    return const Icon(Icons.star, color: Color(0xFFFFB800), size: 16);
+    return const Icon(Icons.star, color: Color(0xFFFFB800), size: 18);
   }
 }

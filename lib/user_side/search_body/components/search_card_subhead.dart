@@ -72,7 +72,7 @@ class SearchCardSubHead extends StatelessWidget {
                         color: Color(0xFFFFB800),
                       ),
                     ),
-                    TextSpan(text: " " + rating.toString()),
+                    TextSpan(text: " " + rating.round().toString()),
                   ],
                 ),
               ),
