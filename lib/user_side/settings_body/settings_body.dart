@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:out_app/user_side/home_body/components/divider.dart';
+import 'package:out_app/user_side/settings_body/screens/help_screen.dart';
+import 'package:out_app/user_side/settings_body/screens/policy_screen.dart';
 
 class SettingsBody extends StatelessWidget {
   const SettingsBody({Key? key}) : super(key: key);
@@ -48,26 +50,43 @@ class SettingsBody extends StatelessWidget {
           ],
         ),
         const DividerPadding(),
+        // Padding(
+        //   padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
+        //   child: TextButton(
+        //       onPressed: () {
+
+        //         FirebaseAuth.instance.currentUser.
+        //       },
+        //       child: Row(children: const [
+        //         Icon(Icons.chevron_left),
+        //         Text('Update Account Details')
+        //       ])),
+        // ),
         Padding(
           padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
           child: TextButton(
-              onPressed: () {},
-              child: Row(children: const [
-                Icon(Icons.chevron_left),
-                Text('Update Account Details')
-              ])),
-        ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
-          child: TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const PolicyScreen(),
+                  ),
+                );
+              },
               child: Row(
                   children: const [Icon(Icons.chevron_left), Text('Policy')])),
         ),
         Padding(
           padding: const EdgeInsets.fromLTRB(0, 0, 0, 4),
           child: TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const HelpScreen(),
+                  ),
+                );
+              },
               child: Row(
                   children: const [Icon(Icons.chevron_left), Text('Help')])),
         ),
