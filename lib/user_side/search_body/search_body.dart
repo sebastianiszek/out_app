@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:out_app/shared/shared_components/input.dart';
 import 'package:out_app/user_side/home_body/components/divider.dart';
@@ -18,14 +19,11 @@ class SearchBody extends StatefulWidget {
 class _SearchBodyState extends State<SearchBody> {
   @override
   Widget build(BuildContext context) {
-    final Stream<QuerySnapshot> _restaurantsStream = FirebaseFirestore.instance
-        .collection('Restaurants')
-        .where('name')
-        .where('opened', isNotEqualTo: false)
-        .snapshots();
+    final Query _restaurantsStream =
+        FirebaseFirestore.instance.collection('Restaurants').where('name');
 
     return StreamBuilder<QuerySnapshot>(
-      stream: _restaurantsStream,
+      stream: _restaurantsStream.snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.hasError) {
           return const Text('Something went wrong');
@@ -64,11 +62,11 @@ class RestaurantList extends StatefulWidget {
 class _RestaurantListState extends State<RestaurantList> {
   String name = '';
   // price1, price2, price3, tables
-  List<bool> filters = [true, true, true, false];
+  List<bool> filters = [true, true, true, false, true];
 
   void resetFilters() {
     setState(() {
-      filters = [true, true, true, false];
+      filters = [true, true, true, false, true];
     });
   }
 
@@ -147,7 +145,8 @@ class _RestaurantListState extends State<RestaurantList> {
   Widget build(BuildContext context) {
     List<QueryDocumentSnapshot<Object?>> list = [];
 
-    if (name.isEmpty == true && filters == [true, true, true, false]) {
+    if (name.isEmpty == true &&
+        listEquals(filters, [true, true, true, false, false])) {
       list = widget.data.docs;
     } else {
       for (int i = 0; i < widget.data.size; i++) {
@@ -157,19 +156,31 @@ class _RestaurantListState extends State<RestaurantList> {
             .contains(name)) {
           int price = widget.data.docs[i]['price'];
           int tables = widget.data.docs[i]['tables'];
+          bool opened = widget.data.docs[i]['opened'];
 
           if (filters[3]) {
             if (tables > 0) {
               if (!isPriceFiltered(filters, price)) {
-                list.add(widget.data.docs[i]);
+                if (filters[4] == true) {
+                  if (opened) {
+                    list.add(widget.data.docs[i]);
+                  }
+                } else {
+                  list.add(widget.data.docs[i]);
+                }
               }
             }
           } else {
             if (!isPriceFiltered(filters, price)) {
-              list.add(widget.data.docs[i]);
+              if (filters[4] == true) {
+                if (opened) {
+                  list.add(widget.data.docs[i]);
+                }
+              } else {
+                list.add(widget.data.docs[i]);
+              }
             }
           }
-          if (widget.data.docs[i]['price'] == 3) {}
         }
       }
     }

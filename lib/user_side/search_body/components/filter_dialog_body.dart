@@ -13,7 +13,7 @@ class FilterDialogBody extends StatefulWidget {
 }
 
 class _FilterDialogBodyState extends State<FilterDialogBody> {
-  List<bool> priceFilter = [true, true, true, false];
+  List<bool> priceFilter = [true, true, true, false, true];
 
   @override
   void initState() {
@@ -50,6 +50,25 @@ class _FilterDialogBodyState extends State<FilterDialogBody> {
                 value: priceFilter[3],
               ),
               Text('With Available Tables',
+                  style: Theme.of(context).textTheme.bodyText1),
+            ],
+            mainAxisAlignment: MainAxisAlignment.start,
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 20, top: 0, bottom: 0),
+          child: Row(
+            children: [
+              Checkbox(
+                onChanged: (value) {
+                  setState(() {
+                    priceFilter[4] = value!;
+                    widget.onFilterChanged(priceFilter);
+                  });
+                },
+                value: priceFilter[4],
+              ),
+              Text('That are opened',
                   style: Theme.of(context).textTheme.bodyText1),
             ],
             mainAxisAlignment: MainAxisAlignment.start,
