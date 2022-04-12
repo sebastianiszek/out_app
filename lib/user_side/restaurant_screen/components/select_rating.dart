@@ -43,7 +43,7 @@ class _SelectRatingState extends State<SelectRating> {
 
     return AlertDialog(
         title: const Text(
-          'Rate the Restaurant',
+          'Choose a Rating',
           textAlign: TextAlign.center,
         ),
         content: Row(
